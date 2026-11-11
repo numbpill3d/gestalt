@@ -26,6 +26,7 @@ export function DesktopShell() {
   const widgets = useWidgetStore((state) => state.widgets);
   const addWidget = useWidgetStore((state) => state.addWidget);
   const themeId = useThemeStore((state) => state.themeId);
+  const showWelcome = useThemeStore((state) => state.showWelcome);
   const theme = getThemeById(themeId);
   const activeCount = widgets.length;
   const availableWidgets = useMemo(() => widgetOptions.filter((option) => !widgets.some((widget) => widget.type === option.type)), [widgets]);
@@ -65,7 +66,7 @@ export function DesktopShell() {
         <nav className="header-actions" aria-label="Workspace actions"><button type="button" className="header-action" onClick={() => setSearchOpen(true)}><span>Search</span><kbd>⌘ K</kbd></button><button type="button" className="header-action" onClick={() => setSettingsOpen(true)}>Settings</button></nav>
       </header>
 
-      {!focusMode && <section className="workspace-intro"><div className="eyebrow">Your starting point</div><h1>Make the web<br /><em>feel like yours.</em></h1><p>A small, personal command center for the places you return to, the ideas you are shaping, and the time between them.</p><div className="intro-actions"><button type="button" className="primary-button" onClick={() => setWidgetShelfOpen(true)}>Add a widget <span>+</span></button><button type="button" className="quiet-button" onClick={() => setFocusMode(true)}>Enter focus mode</button></div></section>}
+      {!focusMode && showWelcome && <section className="workspace-intro"><div className="eyebrow">Your starting point</div><h1>Make the web<br /><em>feel like yours.</em></h1><p>A small, personal command center for the places you return to, the ideas you are shaping, and the time between them.</p><div className="intro-actions"><button type="button" className="primary-button" onClick={() => setWidgetShelfOpen(true)}>Add a widget <span>+</span></button><button type="button" className="quiet-button" onClick={() => setFocusMode(true)}>Enter focus mode</button></div></section>}
 
       <Canvas />
 

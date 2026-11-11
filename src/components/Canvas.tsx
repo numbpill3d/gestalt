@@ -4,6 +4,7 @@ import { DndContext, type DragEndEvent } from "@dnd-kit/core";
 import { restrictToParentElement } from "@dnd-kit/modifiers";
 import { useEffect } from "react";
 import { useWidgetStore } from "@/store/widgetStore";
+import { useThemeStore } from "@/store/themeStore";
 import { Window } from "@/components/Window";
 import { BookmarkWidget } from "@/components/widgets/BookmarkWidget";
 import { NotesWidget } from "@/components/widgets/NotesWidget";
@@ -37,6 +38,7 @@ function WidgetContent({ type }: { type: string }) {
 export function Canvas() {
   const widgets = useWidgetStore((s) => s.widgets);
   const updateWidget = useWidgetStore((s) => s.updateWidget);
+  const snapToGrid = useThemeStore((s) => s.snapToGrid);
 
   useEffect(() => {
     const clampWidgets = () => {
@@ -59,9 +61,11 @@ export function Canvas() {
     const { active, delta } = event;
     const widget = widgets.find((w) => w.id === active.id);
     if (!widget) return;
+    const nextX = widget.x + delta.x;
+    const nextY = widget.y + delta.y;
     updateWidget(widget.id, {
-      x: widget.x + delta.x,
-      y: widget.y + delta.y,
+      x: snapToGrid ? Math.round(nextX / 16) * 16 : nextX,
+      y: snapToGrid ? Math.round(nextY / 16) * 16 : nextY,
     });
   }
 
