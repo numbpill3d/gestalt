@@ -1,6 +1,7 @@
 "use client";
 
 import { DndContext, type DragEndEvent } from "@dnd-kit/core";
+import { restrictToParentElement } from "@dnd-kit/modifiers";
 import { useWidgetStore } from "@/store/widgetStore";
 import { Window } from "@/components/Window";
 import { BookmarkWidget } from "@/components/widgets/BookmarkWidget";
@@ -29,7 +30,7 @@ export function Canvas() {
   }
 
   return (
-    <DndContext onDragEnd={onDragEnd}>
+    <DndContext modifiers={[restrictToParentElement]} onDragEnd={onDragEnd}>
       <div className="relative w-screen h-screen overflow-hidden">
         {widgets.map((widget) => (
           <Window key={widget.id} widget={widget}>

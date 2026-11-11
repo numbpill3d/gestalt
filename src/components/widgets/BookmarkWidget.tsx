@@ -1,7 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useBookmarkStore, faviconForUrl } from "@/store/bookmarkStore";
+
+function normalizeUrl(value: string): string | null {
+  if (/^[a-z][a-z\d+.-]*:/i.test(value) && !/^https?:\/\//i.test(value)) {
+    return null;
+  }
+  try {
+    const candidate = new URL(/^https?:\/\//i.test(value) ? value : `https://${value}`);
+    return candidate.protocol === "http:" || candidate.protocol === "https:"
+      ? candidate.toString()
+      : null;
+  } catch {
+    return null;
+  }
+}
 
 export function BookmarkWidget() {
   const bookmarks = useBookmarkStore((s) => s.bookmarks);
@@ -10,14 +25,23 @@ export function BookmarkWidget() {
 
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
+  const [error, setError] = useState("");
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!title.trim() || !url.trim()) return;
-    const normalized = /^https?:\/\//.test(url) ? url : `https://${url}`;
+    if (!title.trim() || !url.trim()) {
+      setError("Add a title and URL first.");
+      return;
+    }
+    const normalized = normalizeUrl(url.trim());
+    if (!normalized) {
+      setError("Use a valid HTTP or HTTPS URL.");
+      return;
+    }
     addBookmark(title.trim(), normalized);
     setTitle("");
     setUrl("");
+    setError("");
   }
 
   return (
@@ -36,9 +60,12 @@ export function BookmarkWidget() {
               borderRadius: "var(--nova-radius)",
             }}
           >
-            <img
+            <Image
               src={faviconForUrl(b.url)}
               alt=""
+              width={16}
+              height={16}
+              unoptimized
               className="w-4 h-4 shrink-0"
               onError={(e) => {
                 (e.target as HTMLImageElement).style.visibility = "hidden";
@@ -55,10 +82,12 @@ export function BookmarkWidget() {
               {b.title}
             </a>
             <button
+              type="button"
               onClick={() => removeBookmark(b.id)}
-              className="opacity-0 group-hover:opacity-100 text-xs px-1"
+              className="opacity-0 group-hover:opacity-100 focus-visible:opacity-100 text-xs px-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--nova-accent)]"
               style={{ color: "var(--nova-text-muted)" }}
               title="Remove"
+              aria-label={`Remove ${b.title}`}
             >
               ✕
             </button>
@@ -80,6 +109,7 @@ export function BookmarkWidget() {
         style={{ borderColor: "var(--nova-border)" }}
       >
         <input
+          aria-label="Bookmark title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Title"
@@ -92,6 +122,7 @@ export function BookmarkWidget() {
           }}
         />
         <input
+          aria-label="Bookmark URL"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder="URL"
@@ -103,6 +134,11 @@ export function BookmarkWidget() {
             color: "var(--nova-text)",
           }}
         />
+        {error && (
+          <p role="alert" className="text-xs" style={{ color: "var(--nova-text-muted)" }}>
+            {error}
+          </p>
+        )}
         <button
           type="submit"
           className="px-1.5 py-1 text-xs font-bold border"

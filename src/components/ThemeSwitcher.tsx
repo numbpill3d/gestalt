@@ -20,9 +20,10 @@ export function ThemeSwitcher() {
       {themes.map((t) => (
         <button
           key={t.id}
+          type="button"
           onClick={() => setThemeId(t.id)}
           title={t.tagline}
-          className="px-3 py-1.5 text-xs font-bold border cursor-pointer transition-transform hover:scale-105"
+          className="px-3 py-1.5 text-xs font-bold border cursor-pointer transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--nova-accent)]"
           style={{
             borderColor: "var(--nova-border)",
             borderRadius: "var(--nova-radius)",
