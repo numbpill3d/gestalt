@@ -1,4 +1,10 @@
-export type WindowStyle = "win98" | "aero" | "vapor" | "neocities" | "brutalist";
+export type WindowStyle =
+  | "modern"
+  | "win98"
+  | "aero"
+  | "vapor"
+  | "neocities"
+  | "brutalist";
 
 export interface ThemeColors {
   bg: string;

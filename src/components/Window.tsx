@@ -43,9 +43,10 @@ export function Window({
       : undefined,
   };
 
-  function onResizePointerDown(e: React.PointerEvent) {
+  function onResizePointerDown(e: React.PointerEvent<HTMLDivElement>) {
     e.stopPropagation();
     e.preventDefault();
+    e.currentTarget.setPointerCapture(e.pointerId);
     focusWidget(widget.id);
     resizeState.current = {
       startX: e.clientX,
@@ -53,22 +54,31 @@ export function Window({
       startW: widget.w,
       startH: widget.h,
     };
-    window.addEventListener("pointermove", onResizePointerMove);
-    window.addEventListener("pointerup", onResizePointerUp);
   }
 
-  function onResizePointerMove(e: PointerEvent) {
+  function onResizePointerMove(e: React.PointerEvent<HTMLDivElement>) {
     const state = resizeState.current;
     if (!state) return;
-    const nextW = Math.max(MIN_W, state.startW + (e.clientX - state.startX));
-    const nextH = Math.max(MIN_H, state.startH + (e.clientY - state.startY));
+    const maxW = Math.max(MIN_W, window.innerWidth - widget.x - 16);
+    const maxH = Math.max(MIN_H, window.innerHeight - widget.y - 24);
+    const nextW = Math.min(maxW, Math.max(MIN_W, state.startW + (e.clientX - state.startX)));
+    const nextH = Math.min(maxH, Math.max(MIN_H, state.startH + (e.clientY - state.startY)));
     updateWidget(widget.id, { w: nextW, h: nextH });
   }
 
-  function onResizePointerUp() {
+  function onResizePointerUp(e?: React.PointerEvent<HTMLDivElement>) {
     resizeState.current = null;
-    window.removeEventListener("pointermove", onResizePointerMove);
-    window.removeEventListener("pointerup", onResizePointerUp);
+    if (e && e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
+  }
+
+  function onResizeKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowDown" && e.key !== "ArrowLeft" && e.key !== "ArrowUp") return;
+    e.preventDefault();
+    const horizontal = e.key === "ArrowRight" || e.key === "ArrowLeft";
+    const amount = e.key === "ArrowRight" || e.key === "ArrowDown" ? 24 : -24;
+    updateWidget(widget.id, horizontal ? { w: Math.max(MIN_W, widget.w + amount) } : { h: Math.max(MIN_H, widget.h + amount) });
   }
 
   return (
@@ -76,29 +86,26 @@ export function Window({
       ref={setNodeRef}
       style={style}
       onPointerDown={() => focusWidget(widget.id)}
-      className="flex flex-col border shadow-[2px_2px_0_var(--nova-shadow)]"
+      className="nova-window"
       data-dragging={isDragging || undefined}
     >
       <div
         {...listeners}
         {...attributes}
-        className="flex items-center justify-between px-2 py-1 select-none touch-none"
+        className="nova-window-bar select-none touch-none"
         style={{
-          background: "var(--nova-accent)",
-          color: "var(--nova-accent-text)",
-          borderColor: "var(--nova-border)",
-          borderBottom: "1px solid var(--nova-border)",
+          background: "var(--nova-window-bar)",
+          color: "var(--nova-text)",
           cursor: "grab",
           fontFamily: "var(--nova-heading-font)",
         }}
       >
-        <div className="flex items-center gap-1.5">
+        <div className="window-controls">
           <button
             type="button"
             onPointerDown={(e) => e.stopPropagation()}
             onClick={() => toggleMinimize(widget.id)}
-            className="w-3 h-3 rounded-full inline-block border border-black/40 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--nova-accent)]"
-            style={{ background: "#ffbd44" }}
+            className="window-control window-control-minimize"
             title={widget.minimized ? "Restore" : "Minimize"}
             aria-label={`${widget.minimized ? "Restore" : "Minimize"} ${widget.title}`}
             aria-pressed={widget.minimized}
@@ -107,19 +114,18 @@ export function Window({
             type="button"
             onPointerDown={(e) => e.stopPropagation()}
             onClick={() => removeWidget(widget.id)}
-            className="w-3 h-3 rounded-full inline-block border border-black/40 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--nova-accent)]"
-            style={{ background: "#ff605c" }}
+            className="window-control window-control-close"
             title="Close"
             aria-label={`Close ${widget.title}`}
           />
         </div>
-        <span className="text-xs font-bold truncate px-1">{widget.title}</span>
-        <span className="w-3" />
+        <span className="window-title truncate">{widget.title}</span>
+        <span className="window-type">{widget.type}</span>
       </div>
 
       {!widget.minimized && (
         <div
-          className="flex-1 overflow-auto p-2 relative"
+          className="nova-window-body"
           style={{
             background: "var(--nova-surface)",
             color: "var(--nova-text)",
@@ -129,11 +135,14 @@ export function Window({
           {children}
           <div
             onPointerDown={onResizePointerDown}
-            className="absolute bottom-0 right-0 w-4 h-4 cursor-nwse-resize"
-            style={{
-              background:
-                "linear-gradient(135deg, transparent 50%, var(--nova-border) 50%)",
-            }}
+            onPointerMove={onResizePointerMove}
+            onPointerUp={onResizePointerUp}
+            onPointerCancel={onResizePointerUp}
+            onKeyDown={onResizeKeyDown}
+            className="window-resize-handle"
+            role="separator"
+            tabIndex={0}
+            aria-label={`Resize ${widget.title}`}
           />
         </div>
       )}

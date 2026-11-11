@@ -24,6 +24,31 @@ export const windows98: Theme = {
   soundPack: "win98",
 };
 
+export const midnight: Theme = {
+  id: "midnight",
+  name: "Midnight",
+  tagline: "A calm command center for the open web.",
+  colors: {
+    bg: "#08111f",
+    surface: "rgba(17, 29, 49, 0.86)",
+    surfaceAlt: "rgba(27, 43, 69, 0.76)",
+    text: "#e9f0ff",
+    textMuted: "#8fa2c2",
+    accent: "#82f7c5",
+    accentText: "#08111f",
+    border: "rgba(159, 188, 231, 0.2)",
+    shadow: "rgba(0, 0, 0, 0.35)",
+  },
+  borderRadius: "18px",
+  fontFamily: '"Inter", "Segoe UI", sans-serif',
+  headingFontFamily: '"Inter", "Segoe UI", sans-serif',
+  cursor: "default",
+  windowStyle: "modern",
+  background:
+    "radial-gradient(circle at 16% 12%, rgba(58, 102, 160, 0.38), transparent 28%), radial-gradient(circle at 88% 84%, rgba(46, 143, 132, 0.22), transparent 30%), #08111f",
+  soundPack: "none",
+};
+
 export const frutigerAero: Theme = {
   id: "frutiger-aero",
   name: "Frutiger Aero",
@@ -123,6 +148,7 @@ export const brutalist: Theme = {
 };
 
 export const themes: Theme[] = [
+  midnight,
   windows98,
   frutigerAero,
   vaporwave,
@@ -130,7 +156,7 @@ export const themes: Theme[] = [
   brutalist,
 ];
 
-export const defaultTheme = windows98;
+export const defaultTheme = midnight;
 
 export function getThemeById(id: string): Theme {
   return themes.find((t) => t.id === id) ?? defaultTheme;
