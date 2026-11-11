@@ -35,6 +35,7 @@ export function Window({
     left: widget.x,
     top: widget.y,
     width: widget.w,
+    maxWidth: "calc(100vw - 2rem)",
     height: widget.minimized ? "auto" : widget.h,
     zIndex: widget.zIndex,
     transform: transform
@@ -96,7 +97,7 @@ export function Window({
             type="button"
             onPointerDown={(e) => e.stopPropagation()}
             onClick={() => toggleMinimize(widget.id)}
-            className="w-3 h-3 rounded-full inline-block border border-black/40 cursor-pointer"
+            className="w-3 h-3 rounded-full inline-block border border-black/40 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--nova-accent)]"
             style={{ background: "#ffbd44" }}
             title={widget.minimized ? "Restore" : "Minimize"}
             aria-label={`${widget.minimized ? "Restore" : "Minimize"} ${widget.title}`}
@@ -106,7 +107,7 @@ export function Window({
             type="button"
             onPointerDown={(e) => e.stopPropagation()}
             onClick={() => removeWidget(widget.id)}
-            className="w-3 h-3 rounded-full inline-block border border-black/40 cursor-pointer"
+            className="w-3 h-3 rounded-full inline-block border border-black/40 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--nova-accent)]"
             style={{ background: "#ff605c" }}
             title="Close"
             aria-label={`Close ${widget.title}`}
