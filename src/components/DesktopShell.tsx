@@ -61,12 +61,12 @@ export function DesktopShell() {
     <main className={`nova-desktop ${focusMode ? "is-focus-mode" : ""}`}>
       <div className="nova-atmosphere" aria-hidden="true" />
       <header className="nova-header">
-        <div className="brand-lockup"><div className="brand-mark">N</div><div><div className="brand-name">NOVA.EXE</div><div className="brand-subtitle">personal web workspace</div></div></div>
+        <div className="brand-lockup"><div className="brand-mark">N</div><div><div className="brand-name">NOVA.EXE</div><div className="brand-subtitle">LOCAL USER NODE</div></div></div>
         <div className="header-center"><span className="live-indicator" />{theme.name}<span className="header-divider" />{activeCount} active {activeCount === 1 ? "window" : "windows"}</div>
         <nav className="header-actions" aria-label="Workspace actions"><button type="button" className="header-action" onClick={() => setSearchOpen(true)}><span>Search</span><kbd>⌘ K</kbd></button><button type="button" className="header-action" onClick={() => setSettingsOpen(true)}>Settings</button></nav>
       </header>
 
-      {!focusMode && showWelcome && <section className="workspace-intro"><div className="eyebrow">Your starting point</div><h1>Make the web<br /><em>feel like yours.</em></h1><p>A small, personal command center for the places you return to, the ideas you are shaping, and the time between them.</p><div className="intro-actions"><button type="button" className="primary-button" onClick={() => setWidgetShelfOpen(true)}>Add a widget <span>+</span></button><button type="button" className="quiet-button" onClick={() => setFocusMode(true)}>Enter focus mode</button></div></section>}
+      {!focusMode && showWelcome && <section className="workspace-intro"><div className="eyebrow">WELCOME TO NOVA BBS</div><h1>NOVA.EXE<br /><em>READY.</em></h1><p>A monochrome desktop for bookmarks, notes, lists, and whatever you are building next.</p><div className="intro-actions"><button type="button" className="primary-button" onClick={() => setWidgetShelfOpen(true)}>Open widget shelf <span>+</span></button><button type="button" className="quiet-button" onClick={() => setFocusMode(true)}>Focus mode</button></div></section>}
 
       <Canvas />
 

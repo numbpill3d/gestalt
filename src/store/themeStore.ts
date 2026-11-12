@@ -87,6 +87,13 @@ export const useThemeStore = create<ThemeState>()(
           showWindowLabels: true,
         }),
     }),
-    { name: "nova-exe-theme" }
+    {
+      name: "nova-exe-theme",
+      version: 2,
+      migrate: (persisted) => {
+        const state = persisted as Partial<ThemeState>;
+        return state.themeId === "midnight" ? { ...state, themeId: defaultTheme.id } : state;
+      },
+    }
   )
 );

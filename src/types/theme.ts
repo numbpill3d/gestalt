@@ -1,5 +1,6 @@
 export type WindowStyle =
   | "modern"
+  | "macintosh"
   | "win98"
   | "aero"
   | "vapor"

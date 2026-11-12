@@ -49,6 +49,30 @@ export const midnight: Theme = {
   soundPack: "none",
 };
 
+export const macintosh: Theme = {
+  id: "macintosh",
+  name: "Macintosh / BBS",
+  tagline: "Black and white. Local and immediate.",
+  colors: {
+    bg: "#000000",
+    surface: "#f2f2f2",
+    surfaceAlt: "#dddddd",
+    text: "#111111",
+    textMuted: "#444444",
+    accent: "#111111",
+    accentText: "#ffffff",
+    border: "#111111",
+    shadow: "#ffffff",
+  },
+  borderRadius: "0px",
+  fontFamily: '"Courier New", "Lucida Console", monospace',
+  headingFontFamily: '"Courier New", "Lucida Console", monospace',
+  cursor: "default",
+  windowStyle: "macintosh",
+  background: "#000000",
+  soundPack: "none",
+};
+
 export const frutigerAero: Theme = {
   id: "frutiger-aero",
   name: "Frutiger Aero",
@@ -148,6 +172,7 @@ export const brutalist: Theme = {
 };
 
 export const themes: Theme[] = [
+  macintosh,
   midnight,
   windows98,
   frutigerAero,
@@ -156,7 +181,7 @@ export const themes: Theme[] = [
   brutalist,
 ];
 
-export const defaultTheme = midnight;
+export const defaultTheme = macintosh;
 
 export function getThemeById(id: string): Theme {
   return themes.find((t) => t.id === id) ?? defaultTheme;

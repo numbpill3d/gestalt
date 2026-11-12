@@ -36,8 +36,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     root.style.setProperty("--nova-surface-alt", theme.colors.surfaceAlt);
     root.style.setProperty("--nova-text", theme.colors.text);
     root.style.setProperty("--nova-text-muted", theme.colors.textMuted);
-    root.style.setProperty("--nova-accent", accentId === "custom" ? customAccent : accents[accentId] ?? theme.colors.accent);
-    root.style.setProperty("--nova-accent-text", "#08111f");
+    const monochrome = theme.id === "macintosh";
+    root.style.setProperty("--nova-accent", monochrome ? "#111111" : accentId === "custom" ? customAccent : accents[accentId] ?? theme.colors.accent);
+    root.style.setProperty("--nova-accent-text", monochrome ? "#ffffff" : "#08111f");
     root.style.setProperty("--nova-border", theme.colors.border);
     root.style.setProperty("--nova-shadow", theme.colors.shadow);
     root.style.setProperty("--nova-radius", radius ?? theme.borderRadius);
