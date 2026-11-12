@@ -70,7 +70,7 @@ export function Canvas() {
   }
 
   return (
-    <DndContext modifiers={[restrictToParentElement]} onDragEnd={onDragEnd}>
+    <DndContext id="nova-dnd-context" modifiers={[restrictToParentElement]} onDragEnd={onDragEnd}>
       <div className="nova-canvas" aria-label="NOVA workspace canvas">
         {widgets.map((widget) => (
           <Window key={widget.id} widget={widget}>

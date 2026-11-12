@@ -123,7 +123,7 @@ export function BookmarkWidget() {
       </div>
       <div className="bookmark-library-tools">
         <label>Sort <select value={sort} onChange={(event) => setSort(event.target.value as BookmarkSort)} aria-label="Sort bookmarks"><option value="manual">manual</option><option value="title">title</option><option value="domain">domain</option><option value="recent">recent</option></select></label>
-        <div><button type="button" onClick={() => fileInputRef.current?.click()}>IMPORT</button><button type="button" onClick={exportBookmarks}>EXPORT</button><input ref={fileInputRef} type="file" accept=".json,.html,.htm" onChange={onImport} hidden /></div>
+        <div><button type="button" onClick={() => fileInputRef.current?.click()}>IMPORT BROWSER</button><button type="button" onClick={exportBookmarks}>EXPORT</button><input ref={fileInputRef} type="file" accept=".json,.html,.htm" onChange={onImport} hidden /></div>
       </div>
       {importStatus && <p className="bookmark-status" role="status">{importStatus}</p>}
       <ul className={`bookmark-list bookmark-view-${view} ${showFavicons ? "has-favicons" : "no-favicons"}`}>
