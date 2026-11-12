@@ -5,18 +5,23 @@ export interface Bookmark {
   id: string;
   title: string;
   url: string;
+  createdAt?: number;
 }
 
 export type BookmarkView = "list" | "grid" | "compact";
+export type BookmarkSort = "manual" | "title" | "domain" | "recent";
 
 interface BookmarkState {
   bookmarks: Bookmark[];
   view: BookmarkView;
+  sort: BookmarkSort;
   showFavicons: boolean;
   addBookmark: (title: string, url: string) => void;
   removeBookmark: (id: string) => void;
   setView: (view: BookmarkView) => void;
+  setSort: (sort: BookmarkSort) => void;
   setShowFavicons: (showFavicons: boolean) => void;
+  importBookmarks: (bookmarks: Bookmark[]) => void;
 }
 
 function faviconFor(url: string): string {
@@ -43,12 +48,13 @@ export const useBookmarkStore = create<BookmarkState>()(
     (set) => ({
       bookmarks: defaultBookmarks,
       view: "list",
+      sort: "manual",
       showFavicons: true,
       addBookmark: (title, url) =>
         set((state) => ({
           bookmarks: [
             ...state.bookmarks,
-            { id: crypto.randomUUID(), title, url },
+            { id: crypto.randomUUID(), title, url, createdAt: Date.now() },
           ],
         })),
       removeBookmark: (id) =>
@@ -56,7 +62,14 @@ export const useBookmarkStore = create<BookmarkState>()(
           bookmarks: state.bookmarks.filter((b) => b.id !== id),
         })),
       setView: (view) => set({ view }),
+      setSort: (sort) => set({ sort }),
       setShowFavicons: (showFavicons) => set({ showFavicons }),
+      importBookmarks: (bookmarks) =>
+        set((state) => {
+          const existingUrls = new Set(state.bookmarks.map((bookmark) => bookmark.url));
+          const additions = bookmarks.filter((bookmark) => !existingUrls.has(bookmark.url));
+          return { bookmarks: [...state.bookmarks, ...additions] };
+        }),
     }),
     { name: "nova-exe-bookmarks" }
   )

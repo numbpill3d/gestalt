@@ -61,8 +61,8 @@ const defaultWidgets: WidgetInstance[] = [
     title: "Local time",
     x: 920,
     y: 510,
-    w: 180,
-    h: 120,
+    w: 360,
+    h: 240,
     minimized: false,
     zIndex: 3,
   },
@@ -109,12 +109,12 @@ export const useWidgetStore = create<WidgetState>()(
     }),
     {
       name: "nova-exe-widgets",
-      version: 2,
+      version: 3,
       migrate: (persisted) => {
         const state = persisted as Partial<WidgetState>;
         return {
           ...state,
-          widgets: state.widgets?.map((widget) => widget.type === "clock" ? { ...widget, w: Math.min(widget.w, 180), h: Math.min(widget.h, 120) } : widget),
+          widgets: state.widgets?.map((widget) => widget.type === "clock" ? { ...widget, w: 360, h: 240 } : widget),
         };
       },
     }

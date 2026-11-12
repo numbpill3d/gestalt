@@ -23,6 +23,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const windowBlur = useThemeStore((s) => s.windowBlur);
   const radiusStyle = useThemeStore((s) => s.radiusStyle);
   const dockMode = useThemeStore((s) => s.dockMode);
+  const sidebarMode = useThemeStore((s) => s.sidebarMode);
   const showWelcome = useThemeStore((s) => s.showWelcome);
   const snapToGrid = useThemeStore((s) => s.snapToGrid);
   const showWindowLabels = useThemeStore((s) => s.showWindowLabels);
@@ -54,10 +55,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     root.dataset.grid = showGrid ? "on" : "off";
     root.dataset.background = backgroundMode;
     root.dataset.dock = dockMode;
+    root.dataset.sidebar = sidebarMode;
     root.dataset.welcome = showWelcome ? "on" : "off";
     root.dataset.snap = snapToGrid ? "on" : "off";
     root.dataset.windowLabels = showWindowLabels ? "on" : "off";
-  }, [accentId, backgroundMode, customAccent, density, dockMode, radiusStyle, showGrid, showWelcome, showWindowLabels, snapToGrid, theme, windowBlur, windowOpacity]);
+  }, [accentId, backgroundMode, customAccent, density, dockMode, radiusStyle, showGrid, showWelcome, showWindowLabels, sidebarMode, snapToGrid, theme, windowBlur, windowOpacity]);
 
   return <>{children}</>;
 }

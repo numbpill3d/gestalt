@@ -5,6 +5,7 @@ import { defaultTheme } from "@/themes";
 export type BackgroundMode = "aurora" | "deep" | "cobalt" | "ember";
 export type RadiusStyle = "sharp" | "soft" | "round";
 export type DockMode = "wide" | "compact" | "minimal";
+export type SidebarMode = "thin" | "wide";
 
 interface ThemeState {
   themeId: string;
@@ -18,6 +19,7 @@ interface ThemeState {
   windowBlur: number;
   radiusStyle: RadiusStyle;
   dockMode: DockMode;
+  sidebarMode: SidebarMode;
   showWelcome: boolean;
   snapToGrid: boolean;
   showWindowLabels: boolean;
@@ -32,6 +34,7 @@ interface ThemeState {
   setWindowBlur: (windowBlur: number) => void;
   setRadiusStyle: (radiusStyle: RadiusStyle) => void;
   setDockMode: (dockMode: DockMode) => void;
+  setSidebarMode: (sidebarMode: SidebarMode) => void;
   setShowWelcome: (showWelcome: boolean) => void;
   setSnapToGrid: (snapToGrid: boolean) => void;
   setShowWindowLabels: (showWindowLabels: boolean) => void;
@@ -52,6 +55,7 @@ export const useThemeStore = create<ThemeState>()(
       windowBlur: 18,
       radiusStyle: "sharp",
       dockMode: "wide",
+      sidebarMode: "thin",
       showWelcome: true,
       snapToGrid: false,
       showWindowLabels: true,
@@ -66,6 +70,7 @@ export const useThemeStore = create<ThemeState>()(
       setWindowBlur: (windowBlur) => set({ windowBlur }),
       setRadiusStyle: (radiusStyle) => set({ radiusStyle }),
       setDockMode: (dockMode) => set({ dockMode }),
+      setSidebarMode: (sidebarMode) => set({ sidebarMode }),
       setShowWelcome: (showWelcome) => set({ showWelcome }),
       setSnapToGrid: (snapToGrid) => set({ snapToGrid }),
       setShowWindowLabels: (showWindowLabels) => set({ showWindowLabels }),
@@ -82,6 +87,7 @@ export const useThemeStore = create<ThemeState>()(
           windowBlur: 18,
           radiusStyle: "sharp",
           dockMode: "wide",
+          sidebarMode: "thin",
           showWelcome: true,
           snapToGrid: false,
           showWindowLabels: true,

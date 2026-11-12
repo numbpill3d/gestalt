@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { useBookmarkStore, faviconForUrl, type BookmarkView } from "@/store/bookmarkStore";
+import { useBookmarkStore, faviconForUrl, type Bookmark, type BookmarkSort, type BookmarkView } from "@/store/bookmarkStore";
 
 function normalizeUrl(value: string): string | null {
   if (/^[a-z][a-z\d+.-]*:/i.test(value) && !/^https?:\/\//i.test(value)) {
@@ -23,13 +23,70 @@ export function BookmarkWidget() {
   const addBookmark = useBookmarkStore((s) => s.addBookmark);
   const removeBookmark = useBookmarkStore((s) => s.removeBookmark);
   const view = useBookmarkStore((s) => s.view);
+  const sort = useBookmarkStore((s) => s.sort);
   const showFavicons = useBookmarkStore((s) => s.showFavicons);
   const setView = useBookmarkStore((s) => s.setView);
+  const setSort = useBookmarkStore((s) => s.setSort);
   const setShowFavicons = useBookmarkStore((s) => s.setShowFavicons);
+  const importBookmarks = useBookmarkStore((s) => s.importBookmarks);
 
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [error, setError] = useState("");
+  const [importStatus, setImportStatus] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const sortedBookmarks = useMemo(() => [...bookmarks].sort((a, b) => {
+    if (sort === "title") return a.title.localeCompare(b.title);
+    if (sort === "domain") return new URL(a.url).hostname.localeCompare(new URL(b.url).hostname);
+    if (sort === "recent") return (b.createdAt ?? 0) - (a.createdAt ?? 0);
+    return 0;
+  }), [bookmarks, sort]);
+
+  function parseImportedBookmarks(text: string, fileName: string): Bookmark[] {
+    if (/\.html?$/i.test(fileName) || text.trim().startsWith("<!DOCTYPE")) {
+      const document = new DOMParser().parseFromString(text, "text/html");
+      return Array.from(document.querySelectorAll("a[href]")).flatMap((anchor) => {
+        const normalized = normalizeUrl(anchor.getAttribute("href") ?? "");
+        return normalized ? [{ id: crypto.randomUUID(), title: anchor.textContent?.trim() || normalized, url: normalized, createdAt: Date.now() }] : [];
+      });
+    }
+    const value = JSON.parse(text) as unknown;
+    const found: Bookmark[] = [];
+    function collect(item: unknown) {
+      if (Array.isArray(item)) return item.forEach(collect);
+      if (!item || typeof item !== "object") return;
+      const record = item as Record<string, unknown>;
+      const candidateUrl = typeof record.url === "string" ? normalizeUrl(record.url) : null;
+      if (candidateUrl) found.push({ id: crypto.randomUUID(), title: typeof record.title === "string" ? record.title : typeof record.name === "string" ? record.name : candidateUrl, url: candidateUrl, createdAt: Date.now() });
+      if (record.children) collect(record.children);
+      if (record.bookmarks) collect(record.bookmarks);
+    }
+    collect(value);
+    return found;
+  }
+
+  async function onImport(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+    try {
+      const imported = parseImportedBookmarks(await file.text(), file.name);
+      importBookmarks(imported);
+      setImportStatus(imported.length ? `Imported ${imported.length} link${imported.length === 1 ? "" : "s"}.` : "No web links found.");
+    } catch {
+      setImportStatus("Could not read that bookmark file.");
+    }
+  }
+
+  function exportBookmarks() {
+    const blob = new Blob([JSON.stringify(bookmarks, null, 2)], { type: "application/json" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "nova-bookmarks.json";
+    link.click();
+    URL.revokeObjectURL(link.href);
+  }
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -64,8 +121,13 @@ export function BookmarkWidget() {
           <button type="button" className={showFavicons ? "is-active" : ""} onClick={() => setShowFavicons(!showFavicons)} aria-label="Toggle bookmark icons" aria-pressed={showFavicons}>ICO</button>
         </div>
       </div>
+      <div className="bookmark-library-tools">
+        <label>Sort <select value={sort} onChange={(event) => setSort(event.target.value as BookmarkSort)} aria-label="Sort bookmarks"><option value="manual">manual</option><option value="title">title</option><option value="domain">domain</option><option value="recent">recent</option></select></label>
+        <div><button type="button" onClick={() => fileInputRef.current?.click()}>IMPORT</button><button type="button" onClick={exportBookmarks}>EXPORT</button><input ref={fileInputRef} type="file" accept=".json,.html,.htm" onChange={onImport} hidden /></div>
+      </div>
+      {importStatus && <p className="bookmark-status" role="status">{importStatus}</p>}
       <ul className={`bookmark-list bookmark-view-${view} ${showFavicons ? "has-favicons" : "no-favicons"}`}>
-        {bookmarks.map((b) => (
+        {sortedBookmarks.map((b) => (
           <li
             key={b.id}
             className="flex items-center gap-2 px-1.5 py-1 group border"

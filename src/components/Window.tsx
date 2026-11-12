@@ -126,7 +126,7 @@ export function Window({
 
       {!widget.minimized && (
         <div
-          className="nova-window-body"
+          className={`nova-window-body widget-body-${widget.type}`}
           style={{
             background: "var(--nova-surface)",
             color: "var(--nova-text)",
