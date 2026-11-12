@@ -7,6 +7,7 @@ import { SettingsPanel } from "@/components/SettingsPanel";
 import { useWidgetStore, type WidgetType } from "@/store/widgetStore";
 import { useThemeStore } from "@/store/themeStore";
 import { getThemeById } from "@/themes";
+import { Sidebar } from "@/components/Sidebar";
 
 const widgetOptions: Array<{ type: WidgetType; title: string; description: string }> = [
   { type: "bookmarks", title: "Bookmarks", description: "Your links, close at hand." },
@@ -53,7 +54,7 @@ export function DesktopShell() {
 
   function addFromShelf(type: WidgetType) {
     const offset = widgets.length * 24;
-    addWidget({ id: `${type}-1`, type, title: widgetOptions.find((item) => item.type === type)?.title ?? type, x: 80 + offset, y: 180 + offset, w: type === "bookmarks" ? 360 : type === "website" ? 460 : 320, h: type === "clock" || type === "calendar" ? 260 : type === "website" ? 360 : 300, minimized: false });
+    addWidget({ id: `${type}-1`, type, title: widgetOptions.find((item) => item.type === type)?.title ?? type, x: 170 + offset, y: 180 + offset, w: type === "bookmarks" ? 360 : type === "website" ? 460 : type === "clock" ? 180 : 320, h: type === "clock" ? 120 : type === "calendar" ? 260 : type === "website" ? 360 : 300, minimized: false });
     setWidgetShelfOpen(false);
   }
 
@@ -66,6 +67,8 @@ export function DesktopShell() {
         <div className="header-center"><span className="live-indicator" />{theme.name}<span className="header-divider" />{activeCount} {activeCount === 1 ? "window" : "windows"}</div>
         <nav className="header-actions" aria-label="Workspace actions"><button type="button" className="header-action" onClick={() => setSearchOpen(true)}><span>Search</span><kbd>⌘ K</kbd></button><button type="button" className="header-action" onClick={() => setSettingsOpen(true)}>Settings</button></nav>
       </header>
+
+      {!focusMode && <Sidebar onAddWidget={() => setWidgetShelfOpen(true)} onSettings={() => setSettingsOpen(true)} onSearch={() => setSearchOpen(true)} />}
 
       {!focusMode && showWelcome && <section className="workspace-intro"><div className="welcome-titlebar"><span>Welcome to NOVA.EXE</span><span className="welcome-titlebar-box" aria-hidden="true" /></div><div className="welcome-content"><div className="eyebrow">WELCOME TO NOVA BBS</div><h1>NOVA.EXE<br /><em>READY.</em></h1><p>A monochrome desktop for bookmarks, notes, lists, and whatever you are building next.</p><div className="intro-actions"><button type="button" className="primary-button" onClick={() => setWidgetShelfOpen(true)}>Open widget shelf <span>+</span></button><button type="button" className="quiet-button" onClick={() => setFocusMode(true)}>Focus mode</button></div></div></section>}
 

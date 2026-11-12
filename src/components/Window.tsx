@@ -5,7 +5,7 @@ import { useDraggable } from "@dnd-kit/core";
 import type { WidgetInstance } from "@/store/widgetStore";
 import { useWidgetStore } from "@/store/widgetStore";
 
-const MIN_W = 220;
+const MIN_W = 160;
 const MIN_H = 140;
 
 export function Window({
@@ -84,6 +84,7 @@ export function Window({
   return (
     <div
       ref={setNodeRef}
+      id={`nova-window-${widget.id}`}
       style={style}
       onPointerDown={() => focusWidget(widget.id)}
       className="nova-window"

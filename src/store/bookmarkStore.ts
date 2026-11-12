@@ -7,10 +7,16 @@ export interface Bookmark {
   url: string;
 }
 
+export type BookmarkView = "list" | "grid" | "compact";
+
 interface BookmarkState {
   bookmarks: Bookmark[];
+  view: BookmarkView;
+  showFavicons: boolean;
   addBookmark: (title: string, url: string) => void;
   removeBookmark: (id: string) => void;
+  setView: (view: BookmarkView) => void;
+  setShowFavicons: (showFavicons: boolean) => void;
 }
 
 function faviconFor(url: string): string {
@@ -36,6 +42,8 @@ export const useBookmarkStore = create<BookmarkState>()(
   persist(
     (set) => ({
       bookmarks: defaultBookmarks,
+      view: "list",
+      showFavicons: true,
       addBookmark: (title, url) =>
         set((state) => ({
           bookmarks: [
@@ -47,6 +55,8 @@ export const useBookmarkStore = create<BookmarkState>()(
         set((state) => ({
           bookmarks: state.bookmarks.filter((b) => b.id !== id),
         })),
+      setView: (view) => set({ view }),
+      setShowFavicons: (showFavicons) => set({ showFavicons }),
     }),
     { name: "nova-exe-bookmarks" }
   )

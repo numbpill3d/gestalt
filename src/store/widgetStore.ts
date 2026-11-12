@@ -61,8 +61,8 @@ const defaultWidgets: WidgetInstance[] = [
     title: "Local time",
     x: 920,
     y: 510,
-    w: 270,
-    h: 220,
+    w: 180,
+    h: 120,
     minimized: false,
     zIndex: 3,
   },
@@ -107,6 +107,16 @@ export const useWidgetStore = create<WidgetState>()(
           ),
         })),
     }),
-    { name: "nova-exe-widgets" }
+    {
+      name: "nova-exe-widgets",
+      version: 2,
+      migrate: (persisted) => {
+        const state = persisted as Partial<WidgetState>;
+        return {
+          ...state,
+          widgets: state.widgets?.map((widget) => widget.type === "clock" ? { ...widget, w: Math.min(widget.w, 180), h: Math.min(widget.h, 120) } : widget),
+        };
+      },
+    }
   )
 );

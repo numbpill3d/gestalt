@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useBookmarkStore, faviconForUrl } from "@/store/bookmarkStore";
+import { useBookmarkStore, faviconForUrl, type BookmarkView } from "@/store/bookmarkStore";
 
 function normalizeUrl(value: string): string | null {
   if (/^[a-z][a-z\d+.-]*:/i.test(value) && !/^https?:\/\//i.test(value)) {
@@ -22,6 +22,10 @@ export function BookmarkWidget() {
   const bookmarks = useBookmarkStore((s) => s.bookmarks);
   const addBookmark = useBookmarkStore((s) => s.addBookmark);
   const removeBookmark = useBookmarkStore((s) => s.removeBookmark);
+  const view = useBookmarkStore((s) => s.view);
+  const showFavicons = useBookmarkStore((s) => s.showFavicons);
+  const setView = useBookmarkStore((s) => s.setView);
+  const setShowFavicons = useBookmarkStore((s) => s.setShowFavicons);
 
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -49,7 +53,18 @@ export function BookmarkWidget() {
       className="flex flex-col gap-2 h-full text-sm"
       style={{ fontFamily: "var(--nova-font)" }}
     >
-      <ul className="flex flex-col gap-1 flex-1 overflow-auto">
+      <div className="bookmark-toolbar" aria-label="Bookmark display options">
+        <span className="widget-kicker">Saved links</span>
+        <div className="bookmark-view-controls" role="group" aria-label="Bookmark view">
+          {(["list", "grid", "compact"] as BookmarkView[]).map((mode) => (
+            <button key={mode} type="button" className={view === mode ? "is-active" : ""} onClick={() => setView(mode)} aria-label={`${mode} bookmark view`} aria-pressed={view === mode}>
+              {mode === "list" ? "≡" : mode === "grid" ? "▦" : "="}
+            </button>
+          ))}
+          <button type="button" className={showFavicons ? "is-active" : ""} onClick={() => setShowFavicons(!showFavicons)} aria-label="Toggle bookmark icons" aria-pressed={showFavicons}>ICO</button>
+        </div>
+      </div>
+      <ul className={`bookmark-list bookmark-view-${view} ${showFavicons ? "has-favicons" : "no-favicons"}`}>
         {bookmarks.map((b) => (
           <li
             key={b.id}
@@ -60,17 +75,7 @@ export function BookmarkWidget() {
               borderRadius: "var(--nova-radius)",
             }}
           >
-            <Image
-              src={faviconForUrl(b.url)}
-              alt=""
-              width={16}
-              height={16}
-              unoptimized
-              className="w-4 h-4 shrink-0"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.visibility = "hidden";
-              }}
-            />
+            {showFavicons && <Image src={faviconForUrl(b.url)} alt="" width={16} height={16} unoptimized className="bookmark-favicon" onError={(e) => { (e.target as HTMLImageElement).style.visibility = "hidden"; }} />}
             <a
               href={b.url}
               target="_blank"

@@ -30,7 +30,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const root = document.documentElement;
-    const radius = { sharp: "6px", soft: "14px", round: "24px" }[radiusStyle];
+    const radius = { sharp: "0px", soft: "14px", round: "24px" }[radiusStyle];
     root.style.setProperty("--nova-bg", theme.colors.bg);
     root.style.setProperty("--nova-surface", theme.colors.surface);
     root.style.setProperty("--nova-surface-alt", theme.colors.surfaceAlt);
