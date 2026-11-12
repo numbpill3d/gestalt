@@ -62,11 +62,12 @@ export function DesktopShell() {
       <div className="nova-atmosphere" aria-hidden="true" />
       <header className="nova-header">
         <div className="brand-lockup"><div className="brand-mark">N</div><div><div className="brand-name">NOVA.EXE</div><div className="brand-subtitle">LOCAL USER NODE</div></div></div>
-        <div className="header-center"><span className="live-indicator" />{theme.name}<span className="header-divider" />{activeCount} active {activeCount === 1 ? "window" : "windows"}</div>
+        <nav className="mac-menu-items" aria-label="Application menu"><button type="button">File</button><button type="button">Edit</button><button type="button">View</button><button type="button">Windows</button><button type="button">Special</button><button type="button">Help</button></nav>
+        <div className="header-center"><span className="live-indicator" />{theme.name}<span className="header-divider" />{activeCount} {activeCount === 1 ? "window" : "windows"}</div>
         <nav className="header-actions" aria-label="Workspace actions"><button type="button" className="header-action" onClick={() => setSearchOpen(true)}><span>Search</span><kbd>⌘ K</kbd></button><button type="button" className="header-action" onClick={() => setSettingsOpen(true)}>Settings</button></nav>
       </header>
 
-      {!focusMode && showWelcome && <section className="workspace-intro"><div className="eyebrow">WELCOME TO NOVA BBS</div><h1>NOVA.EXE<br /><em>READY.</em></h1><p>A monochrome desktop for bookmarks, notes, lists, and whatever you are building next.</p><div className="intro-actions"><button type="button" className="primary-button" onClick={() => setWidgetShelfOpen(true)}>Open widget shelf <span>+</span></button><button type="button" className="quiet-button" onClick={() => setFocusMode(true)}>Focus mode</button></div></section>}
+      {!focusMode && showWelcome && <section className="workspace-intro"><div className="welcome-titlebar"><span>Welcome to NOVA.EXE</span><span className="welcome-titlebar-box" aria-hidden="true" /></div><div className="welcome-content"><div className="eyebrow">WELCOME TO NOVA BBS</div><h1>NOVA.EXE<br /><em>READY.</em></h1><p>A monochrome desktop for bookmarks, notes, lists, and whatever you are building next.</p><div className="intro-actions"><button type="button" className="primary-button" onClick={() => setWidgetShelfOpen(true)}>Open widget shelf <span>+</span></button><button type="button" className="quiet-button" onClick={() => setFocusMode(true)}>Focus mode</button></div></div></section>}
 
       <Canvas />
 

@@ -304,3 +304,89 @@ html[data-theme="macintosh"] .command-search-row input, html[data-theme="macinto
 html[data-theme="macintosh"] .command-actions button, html[data-theme="macintosh"] .command-results a { border-radius: 0; background: #fff; }
 html[data-theme="macintosh"] .command-actions button:hover, html[data-theme="macintosh"] .command-results a:hover { background: #ddd; }
 html[data-theme="macintosh"] .command-empty, html[data-theme="macintosh"] .command-label, html[data-theme="macintosh"] .command-actions small, html[data-theme="macintosh"] .command-results small { color: #444; }
+
+/* Final Platinum calibration: the shell itself is classic Mac OS, not a modern app wearing a monochrome skin. */
+html[data-theme="macintosh"] body { background: #9b9b9b; color: #111; }
+html[data-theme="macintosh"] .nova-desktop { min-height: 100dvh; background: #9b9b9b; color: #111; }
+html[data-theme="macintosh"] .nova-desktop::after { display: none; }
+html[data-theme="macintosh"] .nova-atmosphere { opacity: 1; background: repeating-linear-gradient(0deg, #9b9b9b 0 1px, #a4a4a4 1px 2px); }
+html[data-theme="macintosh"] .nova-header { display: flex; height: 27px; padding: 0 8px; border-bottom: 1px solid #111; background: #d4d0c8; box-shadow: inset 0 1px #fff; color: #111; }
+html[data-theme="macintosh"] .brand-lockup { gap: 7px; min-width: 172px; }
+html[data-theme="macintosh"] .brand-mark { width: 19px; height: 19px; border: 1px solid #111; color: #111; background: #fff; font-size: 10px; }
+html[data-theme="macintosh"] .brand-name { color: #111; font-size: 11px; letter-spacing: 0.04em; }
+html[data-theme="macintosh"] .brand-subtitle { display: none; }
+html[data-theme="macintosh"] .mac-menu-items { display: flex; align-items: stretch; gap: 0; height: 26px; }
+html[data-theme="macintosh"] .mac-menu-items button { padding: 0 10px; color: #111; background: transparent; font: 11px "Geneva", "Arial", sans-serif; cursor: pointer; }
+html[data-theme="macintosh"] .mac-menu-items button:hover, html[data-theme="macintosh"] .mac-menu-items button:focus-visible { color: #fff; background: #111; outline: none; }
+html[data-theme="macintosh"] .header-center { margin-left: auto; gap: 5px; color: #111; font-size: 10px; }
+html[data-theme="macintosh"] .header-center .live-indicator { width: 4px; height: 4px; background: #111; }
+html[data-theme="macintosh"] .header-divider { height: 12px; background: #111; }
+html[data-theme="macintosh"] .header-actions { min-width: 145px; gap: 2px; }
+html[data-theme="macintosh"] .header-action { padding: 3px 7px; color: #111; font: 11px "Geneva", "Arial", sans-serif; }
+html[data-theme="macintosh"] .header-action:hover { color: #fff; background: #111; }
+html[data-theme="macintosh"] kbd { display: none; }
+html[data-theme="macintosh"] .workspace-intro { width: 390px; margin: 44px 0 0 38px; border: 1px solid #111; background: #d4d0c8; box-shadow: 2px 2px 0 #fff, 4px 4px 0 #111; pointer-events: none; }
+html[data-theme="macintosh"] .welcome-titlebar { display: flex; align-items: center; justify-content: center; height: 23px; border-bottom: 1px solid #111; color: #111; background: repeating-linear-gradient(0deg, #d4d0c8 0 2px, #fff 2px 3px); font: 11px "Geneva", "Arial", sans-serif; }
+html[data-theme="macintosh"] .welcome-titlebar-box { position: absolute; left: 44px; width: 11px; height: 11px; border: 1px solid #111; background: #d4d0c8; }
+html[data-theme="macintosh"] .welcome-content { padding: 18px 20px 20px; }
+html[data-theme="macintosh"] .workspace-intro .eyebrow { margin-bottom: 12px; color: #111; font-size: 10px; }
+html[data-theme="macintosh"] .workspace-intro h1 { color: #111; font: 400 30px/1.05 "Courier New", monospace; letter-spacing: 0; }
+html[data-theme="macintosh"] .workspace-intro h1 em { color: #111; }
+html[data-theme="macintosh"] .workspace-intro p { max-width: 320px; margin: 15px 0 18px; color: #333; font: 12px/1.45 "Courier New", monospace; }
+html[data-theme="macintosh"] .primary-button, html[data-theme="macintosh"] .quiet-button { border: 1px solid #111; border-radius: 0; box-shadow: inset 1px 1px #fff, inset -1px -1px #777; font: 11px "Geneva", "Arial", sans-serif; text-transform: none; }
+html[data-theme="macintosh"] .primary-button { padding: 5px 9px; color: #111; background: #d4d0c8; }
+html[data-theme="macintosh"] .primary-button:hover { color: #fff; background: #111; }
+html[data-theme="macintosh"] .quiet-button { padding: 5px 9px; color: #111; background: #d4d0c8; }
+html[data-theme="macintosh"] .quiet-button:hover { color: #fff; background: #111; }
+html[data-theme="macintosh"] .nova-window { border: 1px solid #111; border-radius: 0; background: #d4d0c8; box-shadow: 2px 2px 0 #fff, 4px 4px 0 #111; backdrop-filter: none; }
+html[data-theme="macintosh"] .nova-window[data-dragging="true"] { border-color: #111; box-shadow: 3px 3px 0 #fff, 5px 5px 0 #111; }
+html[data-theme="macintosh"] .nova-window-bar { min-height: 24px; padding: 0 7px; border-bottom: 1px solid #111; background: repeating-linear-gradient(0deg, #d4d0c8 0 2px, #fff 2px 3px); color: #111 !important; font: 11px "Geneva", "Arial", sans-serif; }
+html[data-theme="macintosh"] .window-controls { width: 42px; gap: 4px; }
+html[data-theme="macintosh"] .window-control { width: 11px; height: 11px; border: 1px solid #111; border-radius: 0; box-shadow: inset 1px 1px #fff; }
+html[data-theme="macintosh"] .window-control-minimize { background: #d4d0c8; }
+html[data-theme="macintosh"] .window-control-close { background: #111; }
+html[data-theme="macintosh"] .window-title { font: 11px "Geneva", "Arial", sans-serif; text-transform: none; }
+html[data-theme="macintosh"] .window-type { color: #333; font: 9px "Geneva", "Arial", sans-serif; }
+html[data-theme="macintosh"] .nova-window-body { height: calc(100% - 25px); padding: 10px; color: #111; background: #f2f2f2; font-family: "Geneva", "Arial", sans-serif; }
+html[data-theme="macintosh"] .nova-window-body::-webkit-scrollbar { width: 15px; }
+html[data-theme="macintosh"] .nova-window-body::-webkit-scrollbar-thumb { border: 1px solid #111; border-radius: 0; background: #d4d0c8; box-shadow: inset 1px 1px #fff; }
+html[data-theme="macintosh"] .window-resize-handle { right: 2px; bottom: 2px; width: 15px; height: 15px; border-radius: 0; background: linear-gradient(135deg, transparent 42%, #111 43%, #111 50%, transparent 51%, transparent 62%, #111 63%, #111 70%, transparent 71%); }
+html[data-theme="macintosh"] .notes-editor, html[data-theme="macintosh"] .website-bar input, html[data-theme="macintosh"] .inline-add input { border: 1px solid #111; border-radius: 0; color: #111; background: #fff; font: 12px/1.45 "Courier New", monospace; }
+html[data-theme="macintosh"] .website-bar button, html[data-theme="macintosh"] .inline-add button { border: 1px solid #111; border-radius: 0; color: #111; background: #d4d0c8; box-shadow: inset 1px 1px #fff, inset -1px -1px #777; font: 11px "Geneva", "Arial", sans-serif; }
+html[data-theme="macintosh"] .clock-time { color: #111; font: 400 36px "Courier New", monospace; letter-spacing: 0; }
+html[data-theme="macintosh"] .clock-status, html[data-theme="macintosh"] .clock-date, html[data-theme="macintosh"] .widget-hint, html[data-theme="macintosh"] .widget-kicker { color: #333; }
+html[data-theme="macintosh"] .calendar-toolbar button, html[data-theme="macintosh"] .calendar-grid span:hover { border: 1px solid #111; border-radius: 0; color: #111; background: #d4d0c8; }
+html[data-theme="macintosh"] .calendar-grid span, html[data-theme="macintosh"] .calendar-weekdays { border-radius: 0; color: #111; }
+html[data-theme="macintosh"] .calendar-grid span.is-today { border-radius: 0; color: #fff; background: #111; }
+html[data-theme="macintosh"] .todo-item, html[data-theme="macintosh"] .plain-list-item { border-color: #111; }
+html[data-theme="macintosh"] .todo-check { border: 1px solid #111; border-radius: 0; color: #fff; }
+html[data-theme="macintosh"] .todo-item.is-done .todo-check { border-color: #111; background: #111; }
+html[data-theme="macintosh"] .todo-remove, html[data-theme="macintosh"] .plain-list-item button { color: #333; }
+html[data-theme="macintosh"] .nova-dock { right: 10px; bottom: 7px; left: 10px; min-height: 29px; padding: 2px 5px; border: 1px solid #111; border-radius: 0; background: #d4d0c8; box-shadow: inset 1px 1px #fff, inset -1px -1px #777; backdrop-filter: none; }
+html[data-theme="macintosh"] .dock-button { padding: 4px 8px; border-radius: 0; color: #111; font: 10px "Geneva", "Arial", sans-serif; }
+html[data-theme="macintosh"] .dock-button.is-active, html[data-theme="macintosh"] .dock-button:hover { color: #fff; background: #111; }
+html[data-theme="macintosh"] .dock-glyph { color: inherit; font-size: 12px; }
+html[data-theme="macintosh"] .dock-hint { color: #111; font: 9px "Courier New", monospace; }
+html[data-theme="macintosh"] .modal-backdrop { background: rgba(0,0,0,0.55); backdrop-filter: none; }
+html[data-theme="macintosh"] .settings-panel, html[data-theme="macintosh"] .widget-shelf, html[data-theme="macintosh"] .command-panel { border: 1px solid #111; border-radius: 0; color: #111; background: #d4d0c8; box-shadow: 2px 2px 0 #fff, 4px 4px 0 #111; }
+html[data-theme="macintosh"] .settings-header { padding: 14px 18px 11px; border-color: #111; background: repeating-linear-gradient(0deg, #d4d0c8 0 2px, #fff 2px 3px); }
+html[data-theme="macintosh"] .settings-header h2 { color: #111; font: 400 18px "Geneva", "Arial", sans-serif; letter-spacing: 0; text-transform: none; }
+html[data-theme="macintosh"] .settings-header p, html[data-theme="macintosh"] .section-heading span, html[data-theme="macintosh"] .settings-footer, html[data-theme="macintosh"] .option-row small, html[data-theme="macintosh"] .toggle-row small { color: #333; }
+html[data-theme="macintosh"] .icon-button, html[data-theme="macintosh"] .theme-card, html[data-theme="macintosh"] .background-option, html[data-theme="macintosh"] .shelf-card { border-color: #111; border-radius: 0; color: #111; background: #f2f2f2; box-shadow: inset 1px 1px #fff; }
+html[data-theme="macintosh"] .theme-card:hover, html[data-theme="macintosh"] .shelf-card:hover { transform: none; background: #ddd; }
+html[data-theme="macintosh"] .theme-card.is-selected, html[data-theme="macintosh"] .background-option.is-selected { border: 2px solid #111; box-shadow: inset 0 0 0 1px #fff; background: #ddd; }
+html[data-theme="macintosh"] .theme-preview { border-radius: 0; border-color: #111; }
+html[data-theme="macintosh"] .theme-check, html[data-theme="macintosh"] .section-heading h3, html[data-theme="macintosh"] .settings-header h2, html[data-theme="macintosh"] .theme-card-copy strong, html[data-theme="macintosh"] .option-row strong, html[data-theme="macintosh"] .toggle-row strong { color: #111; }
+html[data-theme="macintosh"] .settings-section { border-color: #111; }
+html[data-theme="macintosh"] .segmented-control { border-color: #111; border-radius: 0; }
+html[data-theme="macintosh"] .segmented-control button { border-radius: 0; color: #111; }
+html[data-theme="macintosh"] .segmented-control button.is-active { color: #fff; background: #111; }
+html[data-theme="macintosh"] .toggle-ui { border-radius: 0; background: #ddd; box-shadow: inset 1px 1px #fff, inset -1px -1px #777; }
+html[data-theme="macintosh"] .toggle-ui::after { border-radius: 0; background: #111; }
+html[data-theme="macintosh"] .toggle-row input:checked + .toggle-ui { background: #111; }
+html[data-theme="macintosh"] .toggle-row input:checked + .toggle-ui::after { background: #fff; }
+html[data-theme="macintosh"] .range-control small, html[data-theme="macintosh"] .text-button { color: #111; }
+html[data-theme="macintosh"] .command-search-row input, html[data-theme="macintosh"] .command-actions button, html[data-theme="macintosh"] .command-results a { color: #111; }
+html[data-theme="macintosh"] .command-actions button, html[data-theme="macintosh"] .command-results a { border-radius: 0; background: #f2f2f2; }
+html[data-theme="macintosh"] .command-actions button:hover, html[data-theme="macintosh"] .command-results a:hover { background: #ddd; }
+html[data-theme="macintosh"] .command-empty, html[data-theme="macintosh"] .command-label, html[data-theme="macintosh"] .command-actions small, html[data-theme="macintosh"] .command-results small { color: #333; }
