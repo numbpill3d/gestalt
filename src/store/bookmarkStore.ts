@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { gestaltStorage } from "@/store/persistStorage";
 
 export interface Bookmark {
   id: string;
@@ -71,6 +72,6 @@ export const useBookmarkStore = create<BookmarkState>()(
           return { bookmarks: [...state.bookmarks, ...additions] };
         }),
     }),
-    { name: "nova-exe-bookmarks" }
+    { name: "gestalt-bookmarks", storage: gestaltStorage("bookmarks") }
   )
 );

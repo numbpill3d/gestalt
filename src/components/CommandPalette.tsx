@@ -21,7 +21,7 @@ export function CommandPalette({ onClose, onSettings, onAddWidget }: CommandPale
     <div className="modal-backdrop" onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
       <section className="command-panel" role="dialog" aria-modal="true" aria-labelledby="command-title">
         <div className="command-search-row"><span className="command-mark">⌕</span><input autoFocus value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search bookmarks or type a command" aria-label="Search workspace" /><kbd>ESC</kbd></div>
-        <div className="command-section"><div className="command-label" id="command-title">Quick actions</div><div className="command-actions"><button type="button" onClick={onSettings}><span>Settings</span><small>Customize NOVA</small></button><button type="button" onClick={onAddWidget}><span>Add widget</span><small>Open the widget shelf</small></button></div></div>
+        <div className="command-section"><div className="command-label" id="command-title">Quick actions</div><div className="command-actions"><button type="button" onClick={onSettings}><span>Settings</span><small>Customize GESTALT</small></button><button type="button" onClick={onAddWidget}><span>Add widget</span><small>Open the widget shelf</small></button></div></div>
         <div className="command-section"><div className="command-label">Bookmarks</div>{results.length ? <div className="command-results">{results.map((bookmark) => <a key={bookmark.id} href={bookmark.url} target="_blank" rel="noopener noreferrer" onClick={onClose}><span>{bookmark.title}</span><small>{bookmark.url.replace(/^https?:\/\//, "")}</small></a>)}</div> : <p className="command-empty">No matching bookmarks.</p>}</div>
       </section>
     </div>

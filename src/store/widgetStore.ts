@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { gestaltStorage } from "@/store/persistStorage";
 
 export type WidgetType =
   | "bookmarks"
@@ -125,7 +126,8 @@ export const useWidgetStore = create<WidgetState>()(
       resetLayout: () => set({ widgets: defaultWidgets, nextZ: 4 }),
     }),
     {
-      name: "nova-exe-widgets",
+      name: "gestalt-widgets",
+      storage: gestaltStorage("widgets"),
       version: 3,
       migrate: (persisted) => {
         const state = persisted as Partial<WidgetState>;

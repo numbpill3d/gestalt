@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { gestaltStorage } from "@/store/persistStorage";
 import { defaultTheme } from "@/themes";
 
 export type BackgroundMode = "aurora" | "deep" | "cobalt" | "ember";
@@ -94,7 +95,8 @@ export const useThemeStore = create<ThemeState>()(
         }),
     }),
     {
-      name: "nova-exe-theme",
+      name: "gestalt-theme",
+      storage: gestaltStorage("theme"),
       version: 2,
       migrate: (persisted) => {
         const state = persisted as Partial<ThemeState>;

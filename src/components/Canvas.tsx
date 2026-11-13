@@ -70,8 +70,8 @@ export function Canvas({ onCustomize }: { onCustomize: (id: string) => void }) {
   }
 
   return (
-    <DndContext id="nova-dnd-context" modifiers={[restrictToParentElement]} onDragEnd={onDragEnd}>
-      <div className="nova-canvas" aria-label="NOVA workspace canvas">
+    <DndContext id="gestalt-dnd-context" modifiers={[restrictToParentElement]} onDragEnd={onDragEnd}>
+      <div className="gestalt-canvas" aria-label="GESTALT workspace canvas">
         {widgets.map((widget) => (
           <Window key={widget.id} widget={widget} onCustomize={onCustomize}>
             <WidgetContent type={widget.type} />

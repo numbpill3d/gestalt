@@ -83,7 +83,7 @@ export function BookmarkWidget() {
     const blob = new Blob([JSON.stringify(bookmarks, null, 2)], { type: "application/json" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = "nova-bookmarks.json";
+    link.download = "gestalt-bookmarks.json";
     link.click();
     URL.revokeObjectURL(link.href);
   }
@@ -108,7 +108,7 @@ export function BookmarkWidget() {
   return (
     <div
       className="flex flex-col gap-2 h-full text-sm"
-      style={{ fontFamily: "var(--nova-font)" }}
+      style={{ fontFamily: "var(--gestalt-font)" }}
     >
       <div className="bookmark-toolbar" aria-label="Bookmark display options">
         <span className="widget-kicker">Saved links</span>
@@ -132,9 +132,9 @@ export function BookmarkWidget() {
             key={b.id}
             className="flex items-center gap-2 px-1.5 py-1 group border"
             style={{
-              background: "var(--nova-surface-alt)",
-              borderColor: "var(--nova-border)",
-              borderRadius: "var(--nova-radius)",
+              background: "var(--gestalt-surface-alt)",
+              borderColor: "var(--gestalt-border)",
+              borderRadius: "var(--gestalt-radius)",
             }}
           >
             {showFavicons && <Image src={faviconForUrl(b.url)} alt="" width={16} height={16} unoptimized className="bookmark-favicon" onError={(e) => { (e.target as HTMLImageElement).style.visibility = "hidden"; }} />}
@@ -143,7 +143,7 @@ export function BookmarkWidget() {
               target="_blank"
               rel="noopener noreferrer"
               className="truncate flex-1 hover:underline"
-              style={{ color: "var(--nova-text)" }}
+              style={{ color: "var(--gestalt-text)" }}
               title={b.url}
             >
               {b.title}
@@ -151,8 +151,8 @@ export function BookmarkWidget() {
             <button
               type="button"
               onClick={() => removeBookmark(b.id)}
-              className="opacity-0 group-hover:opacity-100 focus-visible:opacity-100 text-xs px-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--nova-accent)]"
-              style={{ color: "var(--nova-text-muted)" }}
+              className="opacity-0 group-hover:opacity-100 focus-visible:opacity-100 text-xs px-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--gestalt-accent)]"
+              style={{ color: "var(--gestalt-text-muted)" }}
               title="Remove"
               aria-label={`Remove ${b.title}`}
             >
@@ -163,7 +163,7 @@ export function BookmarkWidget() {
         {bookmarks.length === 0 && (
           <li
             className="text-xs italic py-4 text-center"
-            style={{ color: "var(--nova-text-muted)" }}
+            style={{ color: "var(--gestalt-text-muted)" }}
           >
             No bookmarks yet.
           </li>
@@ -173,7 +173,7 @@ export function BookmarkWidget() {
       <form
         onSubmit={onSubmit}
         className="flex flex-col gap-1 border-t pt-2"
-        style={{ borderColor: "var(--nova-border)" }}
+        style={{ borderColor: "var(--gestalt-border)" }}
       >
         <input
           aria-label="Bookmark title"
@@ -182,10 +182,10 @@ export function BookmarkWidget() {
           placeholder="Title"
           className="px-1.5 py-1 border text-xs"
           style={{
-            borderColor: "var(--nova-border)",
-            borderRadius: "var(--nova-radius)",
-            background: "var(--nova-surface-alt)",
-            color: "var(--nova-text)",
+            borderColor: "var(--gestalt-border)",
+            borderRadius: "var(--gestalt-radius)",
+            background: "var(--gestalt-surface-alt)",
+            color: "var(--gestalt-text)",
           }}
         />
         <input
@@ -195,14 +195,14 @@ export function BookmarkWidget() {
           placeholder="URL"
           className="px-1.5 py-1 border text-xs"
           style={{
-            borderColor: "var(--nova-border)",
-            borderRadius: "var(--nova-radius)",
-            background: "var(--nova-surface-alt)",
-            color: "var(--nova-text)",
+            borderColor: "var(--gestalt-border)",
+            borderRadius: "var(--gestalt-radius)",
+            background: "var(--gestalt-surface-alt)",
+            color: "var(--gestalt-text)",
           }}
         />
         {error && (
-          <p role="alert" className="text-xs" style={{ color: "var(--nova-text-muted)" }}>
+          <p role="alert" className="text-xs" style={{ color: "var(--gestalt-text-muted)" }}>
             {error}
           </p>
         )}
@@ -210,10 +210,10 @@ export function BookmarkWidget() {
           type="submit"
           className="px-1.5 py-1 text-xs font-bold border"
           style={{
-            borderColor: "var(--nova-border)",
-            borderRadius: "var(--nova-radius)",
-            background: "var(--nova-accent)",
-            color: "var(--nova-accent-text)",
+            borderColor: "var(--gestalt-border)",
+            borderRadius: "var(--gestalt-radius)",
+            background: "var(--gestalt-accent)",
+            color: "var(--gestalt-accent-text)",
           }}
         >
           Add Bookmark

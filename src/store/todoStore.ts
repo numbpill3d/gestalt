@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { gestaltStorage } from "@/store/persistStorage";
 
 export interface TodoItem { id: string; label: string; done: boolean; }
 interface TodoState { items: TodoItem[]; add: (label: string) => void; toggle: (id: string) => void; remove: (id: string) => void; }
@@ -15,6 +16,6 @@ export const useTodoStore = create<TodoState>()(
       toggle: (id) => set((state) => ({ items: state.items.map((item) => item.id === id ? { ...item, done: !item.done } : item) })),
       remove: (id) => set((state) => ({ items: state.items.filter((item) => item.id !== id) })),
     }),
-    { name: "nova-exe-todos" }
+    { name: "gestalt-todos", storage: gestaltStorage("todos") }
   )
 );

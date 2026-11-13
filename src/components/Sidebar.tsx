@@ -8,11 +8,11 @@ export function Sidebar({ onAddWidget, onSettings, onSearch }: { onAddWidget: ()
   function focusWidget(type: string) {
     const widget = widgets.find((item) => item.type === type);
     if (!widget) return;
-    document.getElementById(`nova-window-${widget.id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+    document.getElementById(`gestalt-window-${widget.id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
   return (
-    <aside className="nova-sidebar" aria-label="Workspace sidebar">
+    <aside className="gestalt-sidebar" aria-label="Workspace sidebar">
       <div className="sidebar-caption">PAGES</div>
       <button type="button" className="sidebar-item is-selected" onClick={() => window.scrollTo(0, 0)}><span className="sidebar-glyph">⌂</span><span>HOME</span></button>
       <button type="button" className="sidebar-item" onClick={() => focusWidget("bookmarks")}><span className="sidebar-glyph">▤</span><span>LINKS</span></button>
@@ -23,7 +23,7 @@ export function Sidebar({ onAddWidget, onSettings, onSearch }: { onAddWidget: ()
       <button type="button" className="sidebar-item" onClick={onAddWidget}><span className="sidebar-glyph">+</span><span>ADD</span></button>
       <button type="button" className="sidebar-item" onClick={onSearch}><span className="sidebar-glyph">?</span><span>FIND</span></button>
       <button type="button" className="sidebar-item" onClick={onSettings}><span className="sidebar-glyph">*</span><span>SETUP</span></button>
-      <div className="sidebar-footer">NOVA<br />LOCAL</div>
+      <div className="sidebar-footer">GESTALT<br />LOCAL</div>
     </aside>
   );
 }

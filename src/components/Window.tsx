@@ -52,14 +52,14 @@ export function Window({
     transform: transform
       ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
       : undefined,
-    ["--nova-widget-header-bg" as string]: widget.headerColor ?? "var(--nova-window-bar)",
-    ["--nova-widget-header-text" as string]: widget.headerTextColor ?? "var(--nova-text)",
-    ["--nova-widget-body-bg" as string]: widget.bodyColor ?? "var(--nova-surface)",
-    ["--nova-widget-body-text" as string]: widget.bodyTextColor ?? "var(--nova-text)",
-    ["--nova-widget-header-font" as string]: fontFamily(widget.headerFont),
-    ["--nova-widget-body-font" as string]: fontFamily(widget.bodyFont),
-    ["--nova-widget-header-size" as string]: `${widget.headerSize ?? 11}px`,
-    ["--nova-widget-body-size" as string]: `${widget.bodySize ?? 12}px`,
+    ["--gestalt-widget-header-bg" as string]: widget.headerColor ?? "var(--gestalt-window-bar)",
+    ["--gestalt-widget-header-text" as string]: widget.headerTextColor ?? "var(--gestalt-text)",
+    ["--gestalt-widget-body-bg" as string]: widget.bodyColor ?? "var(--gestalt-surface)",
+    ["--gestalt-widget-body-text" as string]: widget.bodyTextColor ?? "var(--gestalt-text)",
+    ["--gestalt-widget-header-font" as string]: fontFamily(widget.headerFont),
+    ["--gestalt-widget-body-font" as string]: fontFamily(widget.bodyFont),
+    ["--gestalt-widget-header-size" as string]: `${widget.headerSize ?? 11}px`,
+    ["--gestalt-widget-body-size" as string]: `${widget.bodySize ?? 12}px`,
   };
 
   const format = widget.bodyFormat ?? "normal";
@@ -105,22 +105,22 @@ export function Window({
   return (
     <div
       ref={setNodeRef}
-      id={`nova-window-${widget.id}`}
+      id={`gestalt-window-${widget.id}`}
       style={style}
       onPointerDown={() => focusWidget(widget.id)}
-      className="nova-window"
+      className="gestalt-window"
       data-dragging={isDragging || undefined}
     >
       <div
         {...listeners}
         {...attributes}
-        className="nova-window-bar select-none touch-none"
+        className="gestalt-window-bar select-none touch-none"
         style={{
-          background: "var(--nova-widget-header-bg)",
-          color: "var(--nova-widget-header-text)",
+          background: "var(--gestalt-widget-header-bg)",
+          color: "var(--gestalt-widget-header-text)",
           cursor: "grab",
-          fontFamily: "var(--nova-widget-header-font)",
-          fontSize: "var(--nova-widget-header-size)",
+          fontFamily: "var(--gestalt-widget-header-font)",
+          fontSize: "var(--gestalt-widget-header-size)",
         }}
       >
         <div className="window-controls">
@@ -149,13 +149,13 @@ export function Window({
 
       {!widget.minimized && (
         <div
-          className={`nova-window-body widget-body-${widget.type} widget-format-${format}`}
+          className={`gestalt-window-body widget-body-${widget.type} widget-format-${format}`}
           style={{
-            background: "var(--nova-widget-body-bg)",
-            color: "var(--nova-widget-body-text)",
-            fontFamily: "var(--nova-widget-body-font)",
-            fontSize: "var(--nova-widget-body-size)",
-            borderColor: "var(--nova-border)",
+            background: "var(--gestalt-widget-body-bg)",
+            color: "var(--gestalt-widget-body-text)",
+            fontFamily: "var(--gestalt-widget-body-font)",
+            fontSize: "var(--gestalt-widget-body-size)",
+            borderColor: "var(--gestalt-border)",
           }}
         >
           {children}

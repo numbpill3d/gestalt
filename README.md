@@ -1,6 +1,6 @@
-# NOVA.EXE
+# GESTALT
 
-NOVA.EXE is an experimental browser desktop and customizable start-page interface built with Next.js. It presents bookmark tools as draggable, resizable windows and supports switchable visual themes with locally persisted UI state.
+GESTALT is an experimental browser desktop and customizable start-page interface built with Next.js. It presents bookmark tools as draggable, resizable windows and supports switchable visual themes with locally persisted UI state.
 
 ## Features
 
@@ -47,4 +47,4 @@ npm run build
 
 ## Status
 
-NOVA.EXE is an early-stage prototype. APIs and interface behavior may change.
+GESTALT is an early-stage prototype. APIs and interface behavior may change.

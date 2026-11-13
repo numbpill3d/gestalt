@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { gestaltStorage } from "@/store/persistStorage";
 
 interface NotesState {
   content: string;
@@ -13,6 +14,6 @@ export const useNotesStore = create<NotesState>()(
         "Keep this space for ideas, links to revisit, or the one thing you do not want to lose.",
       setContent: (content) => set({ content }),
     }),
-    { name: "nova-exe-notes" }
+    { name: "gestalt-notes", storage: gestaltStorage("notes") }
   )
 );
