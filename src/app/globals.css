@@ -405,8 +405,8 @@ html[data-theme="macintosh"] .bookmark-toolbar { display: flex; align-items: cen
 html[data-theme="macintosh"] .bookmark-view-controls { display: flex; gap: 2px; }
 html[data-theme="macintosh"] .bookmark-view-controls button { min-width: 22px; height: 19px; padding: 0 3px; border: 1px solid #111; color: #111; background: #d4d0c8; font: 10px "Geneva", "Arial", sans-serif; cursor: pointer; }
 html[data-theme="macintosh"] .bookmark-view-controls button.is-active, html[data-theme="macintosh"] .bookmark-view-controls button:hover { color: #fff; background: #111; }
-html[data-theme="macintosh"] .bookmark-list { display: flex; min-height: 0; margin: 0; padding: 2px 0; overflow: auto; }
-html[data-theme="macintosh"] .bookmark-list.bookmark-view-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: start; gap: 4px; }
+html[data-theme="macintosh"] .bookmark-list { display: grid; flex: 1 1 auto; min-height: 0; min-width: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: max-content; align-content: start; gap: 4px; margin: 0; padding: 2px 0; overflow-x: hidden; overflow-y: auto; scrollbar-gutter: stable; }
+html[data-theme="macintosh"] .bookmark-list.bookmark-view-list li { min-width: 0; }
 html[data-theme="macintosh"] .bookmark-list.bookmark-view-grid li { display: flex; min-height: 58px; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 5px; }
 html[data-theme="macintosh"] .bookmark-list.bookmark-view-grid li a { width: 100%; white-space: normal; }
 html[data-theme="macintosh"] .bookmark-list.bookmark-view-compact li { min-height: 23px; padding-top: 2px; padding-bottom: 2px; }
