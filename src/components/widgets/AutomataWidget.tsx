@@ -68,8 +68,11 @@ export function AutomataWidget() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const stepRef = useRef<(() => void) | null>(null);
   const configRef = useRef({ palette, showGrid, running, speed, rule });
-  configRef.current = { palette, showGrid, running, speed, rule };
   const [generation, setGeneration] = useState(0);
+
+  useEffect(() => {
+    configRef.current = { palette, showGrid, running, speed, rule };
+  }, [palette, showGrid, running, speed, rule]);
 
   useEffect(() => {
     const canvasElement = canvasRef.current as HTMLCanvasElement | null;
