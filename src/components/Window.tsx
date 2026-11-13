@@ -8,12 +8,23 @@ import { useWidgetStore } from "@/store/widgetStore";
 const MIN_W = 160;
 const MIN_H = 140;
 
+function fontFamily(font: WidgetInstance["headerFont"]): string {
+  switch (font) {
+    case "courier": return '"Courier New", monospace';
+    case "arial": return 'Arial, sans-serif';
+    case "times": return '"Times New Roman", serif';
+    default: return '"Geneva", "Arial", sans-serif';
+  }
+}
+
 export function Window({
   widget,
   children,
+  onCustomize,
 }: {
   widget: WidgetInstance;
   children: React.ReactNode;
+  onCustomize: (id: string) => void;
 }) {
   const updateWidget = useWidgetStore((s) => s.updateWidget);
   const removeWidget = useWidgetStore((s) => s.removeWidget);
@@ -41,7 +52,17 @@ export function Window({
     transform: transform
       ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
       : undefined,
+    ["--nova-widget-header-bg" as string]: widget.headerColor ?? "var(--nova-window-bar)",
+    ["--nova-widget-header-text" as string]: widget.headerTextColor ?? "var(--nova-text)",
+    ["--nova-widget-body-bg" as string]: widget.bodyColor ?? "var(--nova-surface)",
+    ["--nova-widget-body-text" as string]: widget.bodyTextColor ?? "var(--nova-text)",
+    ["--nova-widget-header-font" as string]: fontFamily(widget.headerFont),
+    ["--nova-widget-body-font" as string]: fontFamily(widget.bodyFont),
+    ["--nova-widget-header-size" as string]: `${widget.headerSize ?? 11}px`,
+    ["--nova-widget-body-size" as string]: `${widget.bodySize ?? 12}px`,
   };
+
+  const format = widget.bodyFormat ?? "normal";
 
   function onResizePointerDown(e: React.PointerEvent<HTMLDivElement>) {
     e.stopPropagation();
@@ -95,10 +116,11 @@ export function Window({
         {...attributes}
         className="nova-window-bar select-none touch-none"
         style={{
-          background: "var(--nova-window-bar)",
-          color: "var(--nova-text)",
+          background: "var(--nova-widget-header-bg)",
+          color: "var(--nova-widget-header-text)",
           cursor: "grab",
-          fontFamily: "var(--nova-heading-font)",
+          fontFamily: "var(--nova-widget-header-font)",
+          fontSize: "var(--nova-widget-header-size)",
         }}
       >
         <div className="window-controls">
@@ -119,6 +141,7 @@ export function Window({
             title="Close"
             aria-label={`Close ${widget.title}`}
           />
+          <button type="button" onPointerDown={(e) => e.stopPropagation()} onClick={() => onCustomize(widget.id)} className="window-control window-control-customize" title="Customize" aria-label={`Customize ${widget.title}`}>+</button>
         </div>
         <span className="window-title truncate">{widget.title}</span>
         <span className="window-type">{widget.type}</span>
@@ -126,10 +149,12 @@ export function Window({
 
       {!widget.minimized && (
         <div
-          className={`nova-window-body widget-body-${widget.type}`}
+          className={`nova-window-body widget-body-${widget.type} widget-format-${format}`}
           style={{
-            background: "var(--nova-surface)",
-            color: "var(--nova-text)",
+            background: "var(--nova-widget-body-bg)",
+            color: "var(--nova-widget-body-text)",
+            fontFamily: "var(--nova-widget-body-font)",
+            fontSize: "var(--nova-widget-body-size)",
             borderColor: "var(--nova-border)",
           }}
         >

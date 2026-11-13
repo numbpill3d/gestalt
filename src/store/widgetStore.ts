@@ -10,6 +10,9 @@ export type WidgetType =
   | "todo"
   | "list";
 
+export type WidgetFont = "geneva" | "courier" | "arial" | "times";
+export type WidgetFormat = "normal" | "compact" | "mono" | "large";
+
 export interface WidgetInstance {
   id: string;
   type: WidgetType;
@@ -20,6 +23,15 @@ export interface WidgetInstance {
   h: number;
   minimized: boolean;
   zIndex: number;
+  headerColor?: string;
+  headerTextColor?: string;
+  bodyColor?: string;
+  bodyTextColor?: string;
+  headerFont?: WidgetFont;
+  bodyFont?: WidgetFont;
+  headerSize?: number;
+  bodySize?: number;
+  bodyFormat?: WidgetFormat;
 }
 
 interface WidgetState {
@@ -30,6 +42,9 @@ interface WidgetState {
   updateWidget: (id: string, patch: Partial<WidgetInstance>) => void;
   focusWidget: (id: string) => void;
   toggleMinimize: (id: string) => void;
+  minimizeAll: () => void;
+  restoreAll: () => void;
+  resetLayout: () => void;
 }
 
 const defaultWidgets: WidgetInstance[] = [
@@ -72,10 +87,9 @@ export const useWidgetStore = create<WidgetState>()(
   persist(
     (set, get) => ({
       widgets: defaultWidgets,
-      nextZ: 2,
+      nextZ: 4,
       addWidget: (widget) =>
         set((state) => {
-          if (state.widgets.some((item) => item.type === widget.type)) return state;
           return {
             widgets: [...state.widgets, { ...widget, zIndex: state.nextZ }],
             nextZ: state.nextZ + 1,
@@ -106,6 +120,9 @@ export const useWidgetStore = create<WidgetState>()(
             w.id === id ? { ...w, minimized: !w.minimized } : w
           ),
         })),
+      minimizeAll: () => set((state) => ({ widgets: state.widgets.map((widget) => ({ ...widget, minimized: true })) })),
+      restoreAll: () => set((state) => ({ widgets: state.widgets.map((widget) => ({ ...widget, minimized: false })) })),
+      resetLayout: () => set({ widgets: defaultWidgets, nextZ: 4 }),
     }),
     {
       name: "nova-exe-widgets",

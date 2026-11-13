@@ -7,6 +7,6 @@ const Canvas = dynamic(
   { ssr: false }
 );
 
-export function CanvasClient() {
-  return <Canvas />;
+export function CanvasClient({ onCustomize }: { onCustomize: (id: string) => void }) {
+  return <Canvas onCustomize={onCustomize} />;
 }

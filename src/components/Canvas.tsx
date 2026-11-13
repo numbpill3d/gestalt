@@ -35,7 +35,7 @@ function WidgetContent({ type }: { type: string }) {
   }
 }
 
-export function Canvas() {
+export function Canvas({ onCustomize }: { onCustomize: (id: string) => void }) {
   const widgets = useWidgetStore((s) => s.widgets);
   const updateWidget = useWidgetStore((s) => s.updateWidget);
   const snapToGrid = useThemeStore((s) => s.snapToGrid);
@@ -73,7 +73,7 @@ export function Canvas() {
     <DndContext id="nova-dnd-context" modifiers={[restrictToParentElement]} onDragEnd={onDragEnd}>
       <div className="nova-canvas" aria-label="NOVA workspace canvas">
         {widgets.map((widget) => (
-          <Window key={widget.id} widget={widget}>
+          <Window key={widget.id} widget={widget} onCustomize={onCustomize}>
             <WidgetContent type={widget.type} />
           </Window>
         ))}
