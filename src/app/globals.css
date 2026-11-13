@@ -469,3 +469,23 @@ html[data-theme="macintosh"] .ascii-art-toolbar button:hover { color: #fff; back
 html[data-theme="macintosh"] .ascii-art-display { border: 1px solid #111; border-radius: 0; color: #111; background: #fff; font: 12px/1.2 "Courier New", monospace; }
 html[data-theme="macintosh"] .ascii-art-footer { color: #444; font: 9px "Courier New", monospace; }
 html[data-theme="macintosh"] .ascii-art-footer a { color: #111; }
+
+.automata-widget { display: flex; height: 100%; min-height: 280px; flex-direction: column; gap: 8px; }
+.automata-stage { min-height: 0; flex: 1; overflow: hidden; border: 1px solid var(--gestalt-border); background: var(--gestalt-surface-alt); }
+.automata-stage canvas { display: block; max-width: 100%; max-height: 100%; margin: auto; image-rendering: pixelated; }
+.automata-toolbar { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+.automata-toolbar button, .automata-controls select { min-height: 24px; border: 1px solid var(--gestalt-border); border-radius: var(--gestalt-radius); color: var(--gestalt-text); background: var(--gestalt-surface-alt); font: 10px var(--gestalt-font); cursor: pointer; }
+.automata-toolbar button { padding: 3px 7px; }
+.automata-toolbar button:hover { color: var(--gestalt-accent-contrast); background: var(--gestalt-accent); }
+.automata-generation { margin-left: auto; color: var(--gestalt-text-muted); font: 10px var(--gestalt-font); }
+.automata-controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.automata-controls label { display: grid; gap: 3px; color: var(--gestalt-text-muted); font-size: 9px; }
+.automata-controls input[type="range"], .automata-controls select { width: 100%; }
+.automata-controls input[type="range"] { accent-color: var(--gestalt-accent); }
+.automata-controls output { color: var(--gestalt-text); font: 9px var(--gestalt-font); }
+.automata-toggle { display: flex !important; align-items: center; gap: 4px; align-self: end; min-height: 24px; }
+html[data-theme="macintosh"] .automata-stage { border-color: #111; background: #fff; }
+html[data-theme="macintosh"] .automata-toolbar button, html[data-theme="macintosh"] .automata-controls select { border: 1px solid #111; border-radius: 0; color: #111; background: #d4d0c8; box-shadow: inset 1px 1px #fff, inset -1px -1px #777; font: 10px "Geneva", "Arial", sans-serif; }
+html[data-theme="macintosh"] .automata-toolbar button:hover { color: #fff; background: #111; }
+html[data-theme="macintosh"] .automata-controls label { color: #333; }
+@media (max-width: 820px) { .automata-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

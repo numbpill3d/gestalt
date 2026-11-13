@@ -10,7 +10,8 @@ export type WidgetType =
   | "website"
   | "todo"
   | "list"
-  | "ascii";
+  | "ascii"
+  | "automata";
 
 export type WidgetFont = "geneva" | "courier" | "arial" | "times";
 export type WidgetFormat = "normal" | "compact" | "mono" | "large";

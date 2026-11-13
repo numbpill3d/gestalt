@@ -14,6 +14,7 @@ import { WebsiteWidget } from "@/components/widgets/WebsiteWidget";
 import { TodoWidget } from "@/components/widgets/TodoWidget";
 import { ListWidget } from "@/components/widgets/ListWidget";
 import { AsciiArtWidget } from "@/components/widgets/AsciiArtWidget";
+import { AutomataWidget } from "@/components/widgets/AutomataWidget";
 
 function WidgetContent({ type }: { type: string }) {
   switch (type) {
@@ -33,6 +34,8 @@ function WidgetContent({ type }: { type: string }) {
       return <ListWidget />;
     case "ascii":
       return <AsciiArtWidget />;
+    case "automata":
+      return <AutomataWidget />;
     default:
       return null;
   }
