@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "extension:chrome": "node scripts/package-extension.mjs chrome",
+    "extension:firefox": "node scripts/package-extension.mjs firefox",
+    "extension:package": "npm run extension:chrome && npm run extension:firefox"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

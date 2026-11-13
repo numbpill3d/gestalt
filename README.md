@@ -9,6 +9,12 @@ GESTALT is an experimental browser desktop and customizable start-page interface
 - Rotating ASCII art widget sourced through a server-side ASCIIArt.eu proxy
 - Cellular automata widget with configurable rule, speed, density, cell size, palette, and grid
 - Winamp-style local audio player with playlist controls and local `.wsz` / image skin loading
+
+## Browser extension packaging
+
+Gestalt includes a Manifest V3 browser extension shell for Chrome and Firefox. It opens the configured Gestalt URL, saves the active tab directly into the bookmark widget, and adds a “Save page to GESTALT” context-menu action.
+
+Run `npm run extension:package`, then load `dist/extension-chrome` as an unpacked extension in Chrome or `dist/extension-firefox` through Firefox’s `about:debugging` page. Use Extension Settings to point the shell at a deployed Gestalt URL instead of the default local development URL.
 - Switchable visual themes
 - Responsive full-screen canvas
 - Client-side state powered by Zustand

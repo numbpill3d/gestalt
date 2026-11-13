@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useBookmarkStore, faviconForUrl, type Bookmark, type BookmarkSort, type BookmarkView } from "@/store/bookmarkStore";
 
@@ -29,6 +29,23 @@ export function BookmarkWidget() {
   const setSort = useBookmarkStore((s) => s.setSort);
   const setShowFavicons = useBookmarkStore((s) => s.setShowFavicons);
   const importBookmarks = useBookmarkStore((s) => s.importBookmarks);
+
+  useEffect(() => {
+    const encoded = new URLSearchParams(window.location.search).get("gestaltBookmark");
+    if (!encoded) return;
+    try {
+      const incoming = JSON.parse(encoded) as { title?: unknown; url?: unknown };
+      const candidate = typeof incoming.url === "string" ? normalizeUrl(incoming.url) : null;
+      if (candidate) {
+        importBookmarks([{ id: crypto.randomUUID(), title: typeof incoming.title === "string" && incoming.title.trim() ? incoming.title.trim() : candidate, url: candidate, createdAt: Date.now() }]);
+        const nextUrl = new URL(window.location.href);
+        nextUrl.searchParams.delete("gestaltBookmark");
+        window.history.replaceState({}, "", nextUrl);
+      }
+    } catch {
+      // Ignore malformed extension handoffs.
+    }
+  }, [importBookmarks]);
 
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");

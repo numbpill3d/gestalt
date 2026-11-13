@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "GESTALT Browser Desk",
+  "version": "0.1.0",
+  "description": "Open Gestalt and save the active browser page to its bookmark workspace.",
+  "action": { "default_title": "Open GESTALT", "default_popup": "popup.html" },
+  "background": { "service_worker": "background.js" },
+  "options_page": "options.html",
+  "permissions": ["tabs", "storage", "contextMenus"]
+}

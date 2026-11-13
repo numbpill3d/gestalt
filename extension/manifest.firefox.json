@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "GESTALT Browser Desk",
+  "version": "0.1.0",
+  "description": "Open Gestalt and save the active browser page to its bookmark workspace.",
+  "action": { "default_title": "Open GESTALT", "default_popup": "popup.html" },
+  "background": { "scripts": ["background.js"] },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "permissions": ["tabs", "storage", "contextMenus"],
+  "browser_specific_settings": { "gecko": { "id": "gestalt-browser-desk@numbpill3d.github.io", "strict_min_version": "109.0" } }
+}
