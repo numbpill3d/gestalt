@@ -489,3 +489,26 @@ html[data-theme="macintosh"] .automata-toolbar button, html[data-theme="macintos
 html[data-theme="macintosh"] .automata-toolbar button:hover { color: #fff; background: #111; }
 html[data-theme="macintosh"] .automata-controls label { color: #333; }
 @media (max-width: 820px) { .automata-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.winamp-widget { display: flex; height: 100%; min-height: 260px; flex-direction: column; gap: 7px; overflow: hidden; padding: 8px; border: 1px solid #111; color: #b9ff5c; background-color: #242424; background-position: center; background-size: cover; font: 10px "Courier New", monospace; }
+.winamp-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 6px; border: 1px solid #555; color: #111; background: linear-gradient(#d9ff9d, #79b52e); font: 11px Arial, sans-serif; font-weight: 700; letter-spacing: 0.08em; }
+.winamp-skin-name { max-width: 50%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 9px "Courier New", monospace; }
+.winamp-display { display: grid; grid-template-columns: 20px 1fr auto; align-items: center; gap: 6px; min-height: 42px; padding: 5px 7px; border: 2px inset #555; color: #b9ff5c; background: #071006; }
+.winamp-display strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; }
+.winamp-display small { color: #75a63a; font-size: 9px; }
+.winamp-led { color: #d5ff83; }
+.winamp-controls { display: flex; gap: 4px; }
+.winamp-controls button, .winamp-actions button { min-height: 23px; border: 1px solid #111; color: #111; background: linear-gradient(#e7e7e7, #999); font: 10px Arial, sans-serif; cursor: pointer; }
+.winamp-controls button { flex: 1; }
+.winamp-controls button:disabled { cursor: not-allowed; opacity: .5; }
+.winamp-controls button:active, .winamp-actions button:active { background: #777; }
+.winamp-slider { display: grid; grid-template-columns: 42px 1fr; align-items: center; gap: 6px; color: #8dbf4b; font-size: 9px; }
+.winamp-slider input { width: 100%; accent-color: #a7e85b; }
+.winamp-actions { display: flex; gap: 5px; flex-wrap: wrap; }
+.winamp-actions button { padding: 3px 6px; font-size: 9px; }
+.winamp-status { overflow: hidden; color: #77a74a; text-overflow: ellipsis; white-space: nowrap; font-size: 9px; }
+.winamp-playlist { min-height: 0; overflow-y: auto; border: 1px solid #555; background: rgba(0, 0, 0, .55); }
+.winamp-playlist button { display: block; width: 100%; overflow: hidden; padding: 4px 6px; border: 0; color: #a3c77c; background: transparent; text-align: left; text-overflow: ellipsis; white-space: nowrap; font: 10px "Courier New", monospace; cursor: pointer; }
+.winamp-playlist button:hover, .winamp-playlist button.is-current { color: #111; background: #b9ff5c; }
+html[data-theme="macintosh"] .winamp-widget { border-radius: 0; }
+html[data-theme="macintosh"] .winamp-head { border-radius: 0; }

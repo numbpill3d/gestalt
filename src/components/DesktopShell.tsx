@@ -20,6 +20,7 @@ const widgetOptions: Array<{ type: WidgetType; title: string; description: strin
   { type: "list", title: "Plain list", description: "A flexible list for anything." },
   { type: "ascii", title: "ASCII art", description: "A rotating text-art signal from ASCIIArt.eu." },
   { type: "automata", title: "Cellular automata", description: "A living rule-based grid you can tune." },
+  { type: "winamp", title: "Winamp player", description: "Local music with personal skin support." },
 ];
 
 export function DesktopShell() {
@@ -68,7 +69,7 @@ export function DesktopShell() {
 
   function addFromShelf(type: WidgetType) {
     const offset = widgets.length * 24;
-    addWidget({ id: `${type}-${crypto.randomUUID()}`, type, title: widgetOptions.find((item) => item.type === type)?.title ?? type, x: 170 + offset, y: 180 + offset, w: type === "bookmarks" ? 360 : type === "website" ? 460 : type === "clock" ? 360 : type === "ascii" ? 390 : type === "automata" ? 430 : 320, h: type === "clock" ? 240 : type === "calendar" ? 260 : type === "website" ? 360 : type === "ascii" ? 330 : type === "automata" ? 400 : 300, minimized: false });
+    addWidget({ id: `${type}-${crypto.randomUUID()}`, type, title: widgetOptions.find((item) => item.type === type)?.title ?? type, x: 170 + offset, y: 180 + offset, w: type === "bookmarks" ? 360 : type === "website" ? 460 : type === "clock" ? 360 : type === "ascii" ? 390 : type === "automata" ? 430 : type === "winamp" ? 360 : 320, h: type === "clock" ? 240 : type === "calendar" ? 260 : type === "website" ? 360 : type === "ascii" ? 330 : type === "automata" ? 400 : type === "winamp" ? 360 : 300, minimized: false });
     setWidgetShelfOpen(false);
   }
 

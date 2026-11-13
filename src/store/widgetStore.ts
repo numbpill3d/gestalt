@@ -11,7 +11,8 @@ export type WidgetType =
   | "todo"
   | "list"
   | "ascii"
-  | "automata";
+  | "automata"
+  | "winamp";
 
 export type WidgetFont = "geneva" | "courier" | "arial" | "times";
 export type WidgetFormat = "normal" | "compact" | "mono" | "large";
