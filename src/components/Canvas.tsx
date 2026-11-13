@@ -13,6 +13,7 @@ import { CalendarWidget } from "@/components/widgets/CalendarWidget";
 import { WebsiteWidget } from "@/components/widgets/WebsiteWidget";
 import { TodoWidget } from "@/components/widgets/TodoWidget";
 import { ListWidget } from "@/components/widgets/ListWidget";
+import { AsciiArtWidget } from "@/components/widgets/AsciiArtWidget";
 
 function WidgetContent({ type }: { type: string }) {
   switch (type) {
@@ -30,6 +31,8 @@ function WidgetContent({ type }: { type: string }) {
       return <TodoWidget />;
     case "list":
       return <ListWidget />;
+    case "ascii":
+      return <AsciiArtWidget />;
     default:
       return null;
   }

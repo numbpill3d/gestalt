@@ -9,7 +9,8 @@ export type WidgetType =
   | "calendar"
   | "website"
   | "todo"
-  | "list";
+  | "list"
+  | "ascii";
 
 export type WidgetFont = "geneva" | "courier" | "arial" | "times";
 export type WidgetFormat = "normal" | "compact" | "mono" | "large";

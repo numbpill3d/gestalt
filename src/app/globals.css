@@ -455,3 +455,17 @@ html[data-theme="macintosh"] .settings-panel, html[data-theme="macintosh"] .widg
   html[data-theme="macintosh"] .inspector-grid { grid-template-columns: 1fr; }
   html[data-theme="macintosh"] .inspector-field-wide { grid-column: auto; }
 }
+
+.ascii-art-widget { display: flex; height: 100%; min-height: 220px; flex-direction: column; gap: 8px; }
+.ascii-art-toolbar, .ascii-art-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.ascii-art-toolbar button { padding: 5px 8px; border: 1px solid var(--gestalt-border); border-radius: var(--gestalt-radius); color: var(--gestalt-text); background: var(--gestalt-surface-alt); font-size: 10px; cursor: pointer; }
+.ascii-art-toolbar button:disabled { cursor: wait; opacity: 0.6; }
+.ascii-art-display { flex: 1; min-height: 0; margin: 0; overflow: auto; padding: 12px; border: 1px solid var(--gestalt-border); border-radius: var(--gestalt-radius); color: var(--gestalt-text); background: var(--gestalt-surface-alt); font: 12px/1.2 "Courier New", monospace; white-space: pre; }
+.ascii-art-footer { color: var(--gestalt-text-muted); font-size: 9px; }
+.ascii-art-footer a { color: var(--gestalt-text-muted); text-decoration: underline; }
+html[data-theme="macintosh"] .ascii-art-widget { min-height: 250px; }
+html[data-theme="macintosh"] .ascii-art-toolbar button { padding: 3px 6px; border: 1px solid #111; border-radius: 0; color: #111; background: #d4d0c8; box-shadow: inset 1px 1px #fff, inset -1px -1px #777; font: 10px "Geneva", "Arial", sans-serif; }
+html[data-theme="macintosh"] .ascii-art-toolbar button:hover { color: #fff; background: #111; }
+html[data-theme="macintosh"] .ascii-art-display { border: 1px solid #111; border-radius: 0; color: #111; background: #fff; font: 12px/1.2 "Courier New", monospace; }
+html[data-theme="macintosh"] .ascii-art-footer { color: #444; font: 9px "Courier New", monospace; }
+html[data-theme="macintosh"] .ascii-art-footer a { color: #111; }

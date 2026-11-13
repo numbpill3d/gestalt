@@ -6,6 +6,7 @@ GESTALT is an experimental browser desktop and customizable start-page interface
 
 - Draggable, focusable, minimizable, and resizable desktop-style windows
 - Bookmark widget with locally persisted entries
+- Rotating ASCII art widget sourced through a server-side ASCIIArt.eu proxy
 - Switchable visual themes
 - Responsive full-screen canvas
 - Client-side state powered by Zustand
