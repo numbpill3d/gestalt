@@ -9,5 +9,5 @@
   "background": { "scripts": ["background.js"] },
   "options_ui": { "page": "options.html", "open_in_tab": true },
   "permissions": ["tabs", "storage", "contextMenus"],
-  "browser_specific_settings": { "gecko": { "id": "gestalt-browser-desk@numbpill3d.github.io", "strict_min_version": "109.0" } }
+  "browser_specific_settings": { "gecko": { "id": "gestalt-browser-desk@numbpill3d.github.io", "strict_min_version": "109.0", "data_collection_permissions": { "required": ["none"] } } }
 }
