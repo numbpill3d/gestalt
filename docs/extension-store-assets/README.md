@@ -7,5 +7,9 @@ These images are prepared for the Chrome Web Store and Firefox Add-ons listing.
 - `screenshot-bookmark-desk-1280x800.png` — local bookmark desk view
 - `screenshot-popup-800x800.png` — browser popup view
 - `screenshot-workspace-1280x800.png` — customizable Gestalt workspace view
+- `actual/gestalt-web-workspace-1440x900.png` — actual rendered Gestalt web workspace capture
+- `actual/gestalt-web-workspace-1024x768.png` — actual rendered compact workspace capture
 
 The screenshots are polished product-preview images in the Gestalt visual language, intended for listing presentation. They do not contain real user data, ratings, or usage claims.
+
+The files in `actual/` are real screenshots captured from the running Gestalt app with Chromium.
