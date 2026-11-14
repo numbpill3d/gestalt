@@ -1,0 +1,22 @@
+const extensionApi = globalThis.browser ?? globalThis.chrome;
+const bookmarksElement = document.querySelector("#bookmarks");
+const statusElement = document.querySelector("#status");
+
+async function getBookmarks() { const saved = await extensionApi.storage.local.get({ bookmarks: [] }); return Array.isArray(saved.bookmarks) ? saved.bookmarks : []; }
+async function setBookmarks(bookmarks) { await extensionApi.storage.local.set({ bookmarks }); }
+function setStatus(message) { statusElement.textContent = message; }
+function normalizeUrl(value) { try { const url = new URL(value); return /^https?:$/.test(url.protocol) ? url.toString() : null; } catch { return null; } }
+
+async function render() {
+  const bookmarks = await getBookmarks(); bookmarksElement.replaceChildren();
+  if (!bookmarks.length) { const empty = document.createElement("p"); empty.className = "empty"; empty.textContent = "NO BOOKMARKS YET. USE ADD CURRENT TAB OR THE FORM ABOVE."; bookmarksElement.append(empty); return; }
+  bookmarks.forEach((bookmark) => { const card = document.createElement("article"); card.className = "bookmark-card"; const link = document.createElement("a"); link.href = bookmark.url; link.target = "_blank"; link.rel = "noreferrer"; link.textContent = bookmark.title || bookmark.url; link.title = bookmark.url; const remove = document.createElement("button"); remove.type = "button"; remove.textContent = "REMOVE"; remove.addEventListener("click", async () => { await setBookmarks((await getBookmarks()).filter((item) => item.id !== bookmark.id)); await render(); setStatus("BOOKMARK REMOVED."); }); const url = document.createElement("small"); url.textContent = bookmark.url; card.append(link, remove, url); bookmarksElement.append(card); });
+}
+
+document.querySelector("#add").addEventListener("click", async () => { const [tab] = await extensionApi.tabs.query({ active: true, currentWindow: true }); if (!tab?.url || !/^https?:\/\//i.test(tab.url)) { setStatus("THIS TAB CANNOT BE SAVED."); return; } const bookmarks = await getBookmarks(); if (!bookmarks.some((item) => item.url === tab.url)) { bookmarks.push({ id: crypto.randomUUID(), title: tab.title || tab.url, url: tab.url, createdAt: Date.now() }); await setBookmarks(bookmarks); setStatus("CURRENT TAB SAVED."); } else setStatus("THAT PAGE IS ALREADY SAVED."); await render(); });
+document.querySelector("#add-form").addEventListener("submit", async (event) => { event.preventDefault(); const title = document.querySelector("#title").value.trim(); const url = normalizeUrl(document.querySelector("#url").value.trim()); if (!url) { setStatus("ENTER A VALID HTTP(S) URL."); return; } const bookmarks = await getBookmarks(); if (!bookmarks.some((item) => item.url === url)) { bookmarks.push({ id: crypto.randomUUID(), title: title || url, url, createdAt: Date.now() }); await setBookmarks(bookmarks); setStatus("BOOKMARK ADDED."); } else setStatus("THAT PAGE IS ALREADY SAVED."); event.target.reset(); await render(); });
+document.querySelector("#export").addEventListener("click", async () => { const blob = new Blob([JSON.stringify(await getBookmarks(), null, 2)], { type: "application/json" }); const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.download = "gestalt-extension-bookmarks.json"; link.click(); URL.revokeObjectURL(link.href); setStatus("BOOKMARKS EXPORTED."); });
+document.querySelector("#import").addEventListener("click", () => document.querySelector("#import-file").click());
+document.querySelector("#import-file").addEventListener("change", async (event) => { const file = event.target.files?.[0]; event.target.value = ""; if (!file) return; try { const imported = JSON.parse(await file.text()); const additions = Array.isArray(imported) ? imported.filter((item) => item && normalizeUrl(item.url)).map((item) => ({ id: crypto.randomUUID(), title: item.title || item.name || item.url, url: normalizeUrl(item.url), createdAt: Date.now() })) : []; const existing = await getBookmarks(); await setBookmarks([...existing, ...additions.filter((item) => !existing.some((saved) => saved.url === item.url))]); setStatus(`IMPORTED ${additions.length} BOOKMARKS.`); await render(); } catch { setStatus("COULD NOT READ THAT JSON FILE."); } });
+document.querySelector("#web-app").addEventListener("click", async () => { const saved = await extensionApi.storage.local.get({ appUrl: "" }); if (!saved.appUrl) { setStatus("CONFIGURE A WEB APP URL IN SETTINGS."); return; } await extensionApi.tabs.create({ url: saved.appUrl }); });
+void render();

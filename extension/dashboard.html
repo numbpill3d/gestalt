@@ -1,0 +1,5 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GESTALT Bookmark Desk</title><link rel="stylesheet" href="dashboard.css"></head>
+  <body><main><header><span class="mark">✳</span><div><strong>GESTALT BOOKMARK DESK</strong><small>LOCAL BROWSER WORKSPACE</small></div><button id="web-app">OPEN WEB APP</button></header><section class="toolbar"><button id="add">ADD CURRENT TAB</button><button id="import">IMPORT JSON</button><button id="export">EXPORT JSON</button><input id="import-file" type="file" accept=".json" hidden></section><form id="add-form"><input id="title" placeholder="Title" aria-label="Bookmark title"><input id="url" type="url" placeholder="https://example.com" aria-label="Bookmark URL"><button>ADD BOOKMARK</button></form><p id="status" role="status">READY.</p><section id="bookmarks" class="bookmark-grid" aria-live="polite"></section></main><script src="config.js"></script><script src="dashboard.js"></script></body>
+</html>

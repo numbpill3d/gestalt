@@ -2,7 +2,7 @@ const extensionApi = globalThis.browser ?? globalThis.chrome;
 const input = document.querySelector("#app-url");
 const status = document.querySelector("#status");
 
-extensionApi.storage.local.get({ appUrl: globalThis.GESTALT_EXTENSION_DEFAULT_URL }).then(({ appUrl }) => { input.value = appUrl; });
+extensionApi.storage.local.get({ appUrl: globalThis.GESTALT_EXTENSION_DEFAULT_URL }).then(({ appUrl }) => { input.value = appUrl; if (appUrl) status.textContent = "WEB APP URL CONFIGURED."; });
 document.querySelector("#save").addEventListener("click", async () => {
   try {
     const value = new URL(input.value).toString().replace(/\/$/, "");

@@ -1,7 +1,10 @@
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
+const execFileAsync = promisify(execFile);
 const target = process.argv[2] === "firefox" ? "firefox" : "chrome";
 const destination = resolve(root, "dist", `extension-${target}`);
 await rm(destination, { recursive: true, force: true });
@@ -11,4 +14,7 @@ const manifest = await readFile(resolve(destination, `manifest.${target}.json`),
 await writeFile(resolve(destination, "manifest.json"), manifest);
 await rm(resolve(destination, "manifest.chrome.json"), { force: true });
 await rm(resolve(destination, "manifest.firefox.json"), { force: true });
-console.log(`Packaged ${target} extension at ${destination}`);
+const archive = resolve(root, "dist", `gestalt-${target}-0.1.0.zip`);
+await rm(archive, { force: true });
+await execFileAsync("zip", ["-qr", archive, "."], { cwd: destination });
+console.log(`Packaged ${target} extension at ${destination} and ${archive}`);

@@ -12,9 +12,11 @@ GESTALT is an experimental browser desktop and customizable start-page interface
 
 ## Browser extension packaging
 
-Gestalt includes a Manifest V3 browser extension shell for Chrome and Firefox. It opens the configured Gestalt URL, saves the active tab directly into the bookmark widget, and adds a “Save page to GESTALT” context-menu action.
+Gestalt includes self-contained Manifest V3 browser extensions for Chrome and Firefox. The extension has its own local bookmark desk, saves the active tab, supports JSON import/export, and adds a “Save page to GESTALT” context-menu action. An optional web-app URL can open a hosted Gestalt workspace.
 
-Run `npm run extension:package`, then load `dist/extension-chrome` as an unpacked extension in Chrome or `dist/extension-firefox` through Firefox’s `about:debugging` page. Use Extension Settings to point the shell at a deployed Gestalt URL instead of the default local development URL.
+Run `npm run extension:package`. This creates loadable directories plus upload-ready ZIP archives: `dist/gestalt-chrome-0.1.0.zip` for Chrome Web Store and `dist/gestalt-firefox-0.1.0.zip` for Firefox Add-ons. For local testing, load `dist/extension-chrome` as unpacked in Chrome or `dist/extension-firefox` through Firefox’s `about:debugging` page.
+
+Store submission notes and permission/privacy copy live in `extension/privacy.html`; use the repository page as the privacy-policy URL when completing the store listing.
 - Switchable visual themes
 - Responsive full-screen canvas
 - Client-side state powered by Zustand

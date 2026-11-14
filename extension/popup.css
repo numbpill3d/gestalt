@@ -9,3 +9,8 @@ button { min-height: 28px; border: 1px solid #111; color: #111; background: #d4d
 button:hover, button:focus-visible { color: #fff; background: #111; outline: none; }
 button.primary { font-weight: 700; }
 #status { min-height: 16px; margin: 2px 0 0; color: #444; font: 12px "Courier New", monospace; }
+.recent { display: grid; gap: 3px; max-height: 116px; overflow-y: auto; border-top: 1px solid #777; padding-top: 6px; }
+.recent a { overflow: hidden; color: #111; text-overflow: ellipsis; white-space: nowrap; font: 11px "Courier New", monospace; }
+.recent a:hover { color: #fff; background: #111; }
+.recent-empty { color: #444; font: 11px "Courier New", monospace; }
+.help { margin: 0; color: #444; font: 12px/1.35 "Courier New", monospace; }
