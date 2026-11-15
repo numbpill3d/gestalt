@@ -2,6 +2,11 @@
 
 GESTALT is an experimental browser desktop and customizable start-page interface built with Next.js. It presents bookmark tools as draggable, resizable windows and supports switchable visual themes with locally persisted UI state.
 
+![gestalt mono promotional banner small](assets/cover-promo-440x280.png)
+![gestalt screenshot showing dashboard in retro macintosh os style](assets/screenshot-bookmark-desk-1280x800.png)
+![gestalt start.me style new tab page extension screenshot number 2](assets/screenshot-popup-800x800.png)
+
+
 ## Features
 
 - Draggable, focusable, minimizable, and resizable desktop-style windows
