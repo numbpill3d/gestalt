@@ -13,12 +13,12 @@
 <table>
   <tr>
     <td align="center">
-      <img src="assets/screenshot-bookmark-desk-1280x800.png" width="520" alt="GESTALT screenshot showing dashboard in retro Macintosh OS style">
+      <img src="assets/gestalt-web-workspace-1024x768.png" width="520" alt="GESTALT screenshot showing dashboard in retro Macintosh OS style">
       <br>
       <sub>Bookmark desk in retro Macintosh OS style</sub>
     </td>
     <td align="center">
-      <img src="assets/screenshot-popup-800x800.png" width="280" alt="GESTALT start.me style new tab page extension screenshot">
+      <img src="assets/gestalt-web-workspace-1440x900.png" width="280" alt="GESTALT start.me style new tab page extension screenshot">
       <br>
       <sub>New tab page extension</sub>
     </td>
