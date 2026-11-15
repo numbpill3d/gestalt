@@ -1,11 +1,29 @@
 # GESTALT
 
-GESTALT is an experimental browser desktop and customizable start-page interface built with Next.js. It presents bookmark tools as draggable, resizable windows and supports switchable visual themes with locally persisted UI state.
+<p align="center">
+  <img src="assets/cover-promo-440x280.png" width="600" alt="GESTALT mono promotional banner">
+</p>
 
-![gestalt mono promotional banner small](assets/cover-promo-440x280.png)
-![gestalt screenshot showing dashboard in retro macintosh os style](assets/screenshot-bookmark-desk-1280x800.png)
-![gestalt start.me style new tab page extension screenshot number 2](assets/screenshot-popup-800x800.png)
+<p align="center">
+  GESTALT is an experimental browser desktop and customizable start-page interface built with Next.js. It presents bookmark tools as draggable, resizable windows and supports switchable visual themes with locally persisted UI state.
+</p>
 
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="assets/screenshot-bookmark-desk-1280x800.png" width="520" alt="GESTALT screenshot showing dashboard in retro Macintosh OS style">
+      <br>
+      <sub>Bookmark desk in retro Macintosh OS style</sub>
+    </td>
+    <td align="center">
+      <img src="assets/screenshot-popup-800x800.png" width="280" alt="GESTALT start.me style new tab page extension screenshot">
+      <br>
+      <sub>New tab page extension</sub>
+    </td>
+  </tr>
+</table>
 
 ## Features
 
@@ -33,34 +51,3 @@ Requirements: a current Node.js release and npm.
 ```bash
 npm install
 npm run dev
-```
-
-Open http://localhost:3000.
-
-## Production build
-
-```bash
-npm run build
-npm start
-```
-
-## Checks
-
-```bash
-npm run lint
-npm run build
-```
-
-## Stack
-
-- Next.js 16
-- React 19
-- TypeScript
-- Tailwind CSS 4
-- dnd-kit
-- Zustand
-- Framer Motion
-
-## Status
-
-GESTALT is an early-stage prototype. APIs and interface behavior may change.
